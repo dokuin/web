@@ -1,0 +1,79 @@
+.banner {
+  background: url('../assets/Group\ 1.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 25em;
+}
+
+.banner-btn {
+  text-decoration: none;
+  padding: 1.5vh 1.5vw;
+  border-radius: 1vh;
+  color: white;
+  background-color: #31475f;
+}
+
+.banner-btn:hover {
+  text-decoration: none;
+  color: black;
+  background-color: #59adb5;
+}
+
+.font-large {
+  font-size: large;
+}
+
+.font-xlarge {
+  font-size: x-large;
+}
+
+.font-xxlarge {
+  font-size: xx-large;
+}
+
+.router-link {
+  transition: 0.1s;
+}
+.router-link:hover {
+  text-decoration: none;
+  transform: scale(1.1);
+}
+
+.nav-link {
+  transition: 0.3s;
+  color: black;
+}
+
+.nav-link:hover {
+  color: blue;
+}
+
+.accordion-item {
+  border-radius: unset !important;
+  border: none !important;
+}
+
+.accordion-toggle {
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.accordion-toggle:hover {
+  color: black;
+}
+
+.section {
+  min-height: 40vh;
+}
+
+.image-placeholder {
+  height: 10em;
+  width: 10em;
+  background-color: aquamarine;
+}
+
+.clipboard-link:hover {
+  color: #5194ff;
+  cursor: pointer;
+}
