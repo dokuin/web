@@ -1,5 +1,6 @@
 import React from 'react'
 import { Table } from 'react-bootstrap'
+import { FaTrash, FaRegEdit } from "react-icons/fa";
 export default function EndpointTable() {
     return (
         <>
@@ -12,6 +13,7 @@ export default function EndpointTable() {
                         <th>Description</th>
                         <th>Query Params</th>
                         <th>Request Body</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -22,14 +24,16 @@ export default function EndpointTable() {
                         <td>Get All movies</td>
                         <td>no</td>
                         <td>no</td>
+                        <td><div style={{ display: "flex", justifyContent: "space-around" }}><FaTrash /> <FaRegEdit /></div></td>
                     </tr>
                     <tr>
-                        <td>1</td>
+                        <td>2</td>
                         <td>POST</td>
                         <td>/movies</td>
                         <td>Get All movies</td>
+                        <td>key = id, value = 129nas </td>
                         <td>no</td>
-                        <td>no</td>
+                        <td><div style={{ display: "flex", justifyContent: "space-around" }}><FaTrash /> <FaRegEdit /></div></td>
                     </tr>
                 </tbody>
             </Table>

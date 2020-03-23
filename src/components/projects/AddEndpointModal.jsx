@@ -1,5 +1,5 @@
 import React from 'react'
-import { Modal, Button } from 'react-bootstrap'
+import { Modal, Button, Form } from 'react-bootstrap'
 export default function AddEndpointModal(props) {
     return (
         <>
@@ -9,13 +9,22 @@ export default function AddEndpointModal(props) {
                 <Modal.Header closeButton>
                     <Modal.Title>Modal heading</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                <Modal.Body> <Form>
+                    <Form.Group >
+                        <Form.Label>HTTP Method</Form.Label>
+                        <Form.Control type="text" placeholder="Tokomedia" />
+                    </Form.Group>
+                    <Form.Group >
+                        <Form.Label>Path</Form.Label>
+                        <Form.Control type="text" placeholder="sunday-store.herokuapp.com" />
+                    </Form.Group>
+                </Form></Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={props.handleClose}>
                         Close
                      </Button>
-                    <Button variant="primary" onClick={props.handleClose}>
-                        Save Changes
+                    <Button variant="primary" type="submit">
+                        Submit
                     </Button>
                 </Modal.Footer>
             </Modal>

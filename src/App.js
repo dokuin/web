@@ -1,22 +1,37 @@
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
-import HomePage from './pages/HomePage'
-import ProjectPage from './pages/ProjectPage'
+import React from 'react'
+import { Provider as StoreProvider } from 'react-redux'
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect
+} from 'react-router-dom'
+import store from './store'
+
+import Header from './partials/Header'
+import Footer from './partials/Footer'
+import HomePage from './components/homepage/Banner'
+import ProjectPage from './components/projects/ProjectPage'
+import NewProjectsPage from './components/projects/AddNewProject'
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/">
-          <HomePage />
-        </Route>
-        <Route path="/projects">
-          <ProjectPage />
-        </Route>
-      </Switch>
-    </Router>
-  );
+    <StoreProvider store={store}>
+      <Router>
+        <Header />
+
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/projects" component={ProjectPage} />
+          <Route path="/newprojects" component={NewProjectsPage} />
+          <Route path="*">
+            <Redirect to="/" />
+          </Route>
+        </Switch>
+
+        <Footer />
+      </Router>
+    </StoreProvider>
+  )
 }
 
-export default App;
+export default App
