@@ -6,6 +6,7 @@ import DokuinLogo from '../assets/logo dokuin.png'
 const Header = () => {
   return (
     <Navbar
+      id="navigation"
       collapseOnSelect
       expand="lg"
       className="m-0 d-flex justify-content-center"
