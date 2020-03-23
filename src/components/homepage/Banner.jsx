@@ -9,7 +9,12 @@ const Banner = () => {
   return (
     <div
       className="section d-flex align-items-center justify-content-center text-center banner"
-      style={{ borderRadius: 0, height: '100vh' }}
+      style={{
+        borderRadius: 0,
+        height: '90vh',
+        position: 'sticky',
+        width: '100%'
+      }}
     >
       <Fade top>
         <div className="d-flex flex-column align-items-center">
@@ -21,14 +26,17 @@ const Banner = () => {
               height: '30vh'
             }}
           />
-          <h1 className="font-weight-bold" style={{ fontSize: '5vw' }}>
+          <h1 className="font-weight-bold" style={{ fontSize: '5em' }}>
             Dokuin.js
           </h1>
-          <h3 className="font-weight-bold my-3" style={{ fontSize: '2.5vw' }}>
+          <h3 className="font-weight-bold my-3" style={{ fontSize: '2em' }}>
             Online API documentation maker
           </h3>
-          <Link to="/newprojects" className="banner-btn btn-1 mr-2">
-
+          <Link
+            to="/new-project"
+            className="banner-btn btn-1 mr-2 font-weight-bold"
+            style={{ fontSize: '1.5em' }}
+          >
             Start Now
           </Link>
         </div>

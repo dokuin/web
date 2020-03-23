@@ -1,11 +1,14 @@
 const initialState = {
-  projectData: {}
+  projects: []
 }
 
 function project(state = initialState, action) {
   switch (action.type) {
     case 'SAVE_PROJECT':
-      return { ...state, projectData: action.payload.projectData }
+      return {
+        ...state,
+        projects: [...state.projects, action.payload.projectData]
+      }
 
     default:
       return state
