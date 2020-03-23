@@ -4,9 +4,10 @@ import { Container } from 'react-bootstrap'
 const Footer = () => {
   return (
     <div
+      id="footer"
       className="footer py-3 m-0"
       style={{
-        position: 'relative',
+        position: 'sticky',
         backgroundColor: '#2C4054',
         zIndex: '2',
         bottom: '0',

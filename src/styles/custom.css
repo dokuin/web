@@ -49,31 +49,7 @@
   color: blue;
 }
 
-.accordion-item {
-  border-radius: unset !important;
-  border: none !important;
-}
-
-.accordion-toggle {
+.icon:hover {
   cursor: pointer;
-  transition: 0.3s;
-}
-
-.accordion-toggle:hover {
-  color: black;
-}
-
-.section {
-  min-height: 40vh;
-}
-
-.image-placeholder {
-  height: 10em;
-  width: 10em;
-  background-color: aquamarine;
-}
-
-.clipboard-link:hover {
-  color: #5194ff;
-  cursor: pointer;
+  color: #31475f;
 }

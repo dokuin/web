@@ -11,8 +11,9 @@ import store from './store'
 import Header from './partials/Header'
 import Footer from './partials/Footer'
 import HomePage from './components/homepage/Banner'
-import ProjectPage from './components/projects/ProjectPage'
+import ProjectPage from './pages/ProjectPage'
 import NewProjectsPage from './components/projects/AddNewProject'
+
 function App() {
   return (
     <StoreProvider store={store}>
@@ -22,7 +23,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/projects" component={ProjectPage} />
-          <Route path="/newprojects" component={NewProjectsPage} />
+          <Route path="/new-project" component={NewProjectsPage} />
           <Route path="*">
             <Redirect to="/" />
           </Route>
