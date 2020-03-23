@@ -8,6 +8,11 @@ import {
 } from 'react-router-dom'
 import store from './store'
 
+
+import Header from './partials/Header'
+import Footer from './partials/Footer'
+import Homepage from './pages/Homepage'
+
 import Header from './partials/Header'
 import Footer from './partials/Footer'
 import HomePage from './components/homepage/Banner'

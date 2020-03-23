@@ -28,6 +28,7 @@ const Banner = () => {
             Online API documentation maker
           </h3>
           <Link to="/newprojects" className="banner-btn btn-1 mr-2">
+
             Start Now
           </Link>
         </div>
