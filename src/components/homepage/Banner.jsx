@@ -27,7 +27,8 @@ const Banner = () => {
           <h3 className="font-weight-bold my-3" style={{ fontSize: '2.5vw' }}>
             Online API documentation maker
           </h3>
-          <Link to="/" className="banner-btn btn-1 mr-2">
+          <Link to="/newprojects" className="banner-btn btn-1 mr-2">
+
             Start Now
           </Link>
         </div>
