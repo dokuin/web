@@ -27,9 +27,6 @@ export default function ProjectPage() {
                   Add Endpoint
                 </Button>
                 <Button variant="primary" onClick={handleShow}>
-                  Edit Project
-                </Button>
-                <Button variant="primary" onClick={handleShow}>
                   Create Markdown
                 </Button>
               </div>
