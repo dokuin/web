@@ -1,7 +1,19 @@
 import React from 'react'
 import { Navbar, Nav, Container, Image } from 'react-bootstrap'
 import { Link, useLocation } from 'react-router-dom'
-import DokuinLogo from '../assets/logo dokuin.png'
+
+import DokuinLogo from '../assets/dokuin-logo.png'
+
+import styled from 'styled-components'
+
+const HoverText = styled.p`
+  color: white;
+  :hover {
+    border-bottom: 2px solid #59adb5cc;
+
+    cursor: pointer;
+  }
+`
 
 const Header = () => {
     const { pathname } = useLocation()
@@ -29,19 +41,21 @@ const Header = () => {
           <Nav className="">
             <Link to="/" className="router-link">
               <Nav.Link as="div" className="text-white font-weight-bold">
-                Editor
+                <HoverText className="my-auto">Editor</HoverText>
               </Nav.Link>
             </Link>
 
             <Link to="/" className="router-link">
               <Nav.Link as="div" className="text-white font-weight-bold">
-                Dokuin CLI
+                <HoverText className="my-auto">Dokuin CLI</HoverText>
               </Nav.Link>
             </Link>
 
             <Link to="/login" className="router-link">
               <Nav.Link as="div" className="text-white font-weight-bold">
-                {localStorage.getItem('token') ? 'Profile' : 'Login'}
+                <HoverText className="my-auto">
+                  {localStorage.getItem('token') ? 'Profile' : 'Login'}
+                </HoverText>
               </Nav.Link>
             </Link>
           </Nav>

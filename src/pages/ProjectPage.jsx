@@ -16,7 +16,11 @@ export default function ProjectPage() {
       <Slide duration={500} bottom>
         <div className="wavy-background"></div>
       </Slide>
-      <Container style={{ minHeight: '90vh' }}>
+      <Container style={{ minHeight: '90vh' }} fluid>
+        <Row>
+          <Col></Col>
+          <Col></Col>
+        </Row>
         <Fade>
           <ProjectDetailForm />
           <Row>

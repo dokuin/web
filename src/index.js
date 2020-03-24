@@ -4,6 +4,7 @@ import App from './App'
 import './styles/App.css'
 import './styles/svgBackground.css'
 import './styles/custom.css'
+import './styles/neumorph.css'
 import * as serviceWorker from './serviceWorker'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
