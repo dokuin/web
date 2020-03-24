@@ -1,10 +1,13 @@
 import React from 'react'
 import { Navbar, Nav, Container, Image } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import DokuinLogo from '../assets/logo dokuin.png'
 
 const Header = () => {
+    const { pathname } = useLocation()
+ 
   return (
+    pathname !== '/login'  &&
     <Navbar
       id="navigation"
       collapseOnSelect
@@ -36,7 +39,7 @@ const Header = () => {
               </Nav.Link>
             </Link>
 
-            <Link to="/" className="router-link">
+            <Link to="/login" className="router-link">
               <Nav.Link as="div" className="text-white font-weight-bold">
                 {localStorage.getItem('token') ? 'Profile' : 'Login'}
               </Nav.Link>
