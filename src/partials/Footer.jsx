@@ -1,8 +1,13 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
+import { useRouteMatch, useLocation } from 'react-router-dom'
 
 const Footer = () => {
+  const { pathname } = useLocation()
+  
+
   return (
+    pathname !== '/login' &&
     <div
       id="footer"
       className="footer py-3 m-0"
