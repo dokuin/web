@@ -4,10 +4,10 @@ const initialState = {
 
 function project(state = initialState, action) {
   switch (action.type) {
-    case 'SAVE_PROJECT':
+    case 'ADD_NEW_PROJECT':
       return {
         ...state,
-        projects: [...state.projects, action.payload.projectData]
+        projects: [...state.projects, action.payload.project]
       }
 
     default:

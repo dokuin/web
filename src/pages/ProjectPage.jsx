@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 import { Slide, Fade } from 'react-reveal'
 
 import EndpointTable from '../components/projects/EndpointTable'
@@ -16,19 +16,21 @@ export default function ProjectPage() {
       <Slide duration={500} bottom>
         <div className="wavy-background"></div>
       </Slide>
-      <Container style={{ minHeight: '90vh' }}>
+      <Container style={{ minHeight: '90vh' }} fluid>
         <Fade>
-          <ProjectDetailForm />
+          <div className="my-5">
+            <ProjectDetailForm />
+          </div>
           <Row>
             <Col md={{ span: 10, offset: 1 }}>
               <EndpointTable />
-              <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-                <Button variant="primary" onClick={handleShow}>
+              <div className="d-flex justify-content-around my-4">
+                <button className="neumorph-btn px-3 py-2" onClick={handleShow}>
                   Add Endpoint
-                </Button>
-                <Button variant="primary" onClick={handleShow}>
+                </button>
+                <button className="neumorph-btn px-3 py-2" onClick={handleShow}>
                   Create Markdown
-                </Button>
+                </button>
               </div>
               <AddEndpointModal
                 show={show}
