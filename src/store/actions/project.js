@@ -19,6 +19,19 @@ export const updateProject = (projectData, projectId) => {
   }
 }
 
+export const deleteProject = (projectId) => {
+  return (dispatch, getState) => {
+    let projectList = [...getState().projectReducer.projects]
+    projectList.splice(projectId, 1)
+    dispatch({
+      type: 'DELETE_PROJECT',
+      payload: {
+        projectList
+      }
+    })
+  }
+}
+
 export const addEndpoint = (endpoint, projectId) => {
   console.log(endpoint)
   return (dispatch, getState) => {

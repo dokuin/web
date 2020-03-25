@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Provider as StoreProvider } from 'react-redux'
 import {
   BrowserRouter as Router,
@@ -16,26 +16,24 @@ import NewProjectsPage from './components/projects/AddNewProject'
 import LoginPage from './pages/LoginPage'
 import ProfilePage from './pages/ProfilePage'
 
-const AuthenticationRoute = ({component: Component,...rest}) =>(
-  <Route {...rest}
-  render={props =>
-  localStorage.getItem('token')? (
-    <Component {...props} />
-    ) : (
-    <Redirect 
-    to={{
-      pathname : "/login"
-    }}
-     />
-  )
-  }
+const AuthenticationRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={(props) =>
+      localStorage.getItem('token') ? (
+        <Component {...props} />
+      ) : (
+        <Redirect
+          to={{
+            pathname: '/login'
+          }}
+        />
+      )
+    }
   />
 )
 
-
 function App() {
-
-
   return (
     <StoreProvider store={store}>
       <Router>
@@ -44,15 +42,17 @@ function App() {
           <Route exact path="/" component={HomePage} />
           <Route path="/projects" component={ProjectPage} />
           <AuthenticationRoute path="/profile" component={ProfilePage} />
-          <AuthenticationRoute path="/new-project" component={NewProjectsPage} />
-        <Route path="/login" component={LoginPage} />
+          <AuthenticationRoute
+            path="/new-project"
+            component={NewProjectsPage}
+          />
+          <Route path="/login" component={LoginPage} />
           <Route path="*">
             <Redirect to="/" />
           </Route>
         </Switch>
         <Footer />
       </Router>
-    
     </StoreProvider>
   )
 }
