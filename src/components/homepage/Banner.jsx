@@ -38,15 +38,9 @@ const Banner = () => {
           <Link
             title="Create new project"
             to="/new-project"
-<<<<<<< HEAD
             className="banner-btn mr-2 font-weight-bold"
             style={{ fontSize: '1.5em' }}
           >
-=======
-            className="banner-btn btn-1 mr-2 font-weight-bold"
-            style={{ fontSize: '1.5em' ,}}
-            >
->>>>>>> navbar landing page
             Start Now
           </Link>
             </div>
