@@ -45,7 +45,7 @@ const Sidebar = (props) => {
   return (
     <div style={{ position: 'sticky', top: 0 }}>
       <Fab
-        className="neumorph-btn icon m-3"
+        className="neumorph-btn icon mt-2 mx-3"
         style={{ backgroundColor: '#d5dbf6' }}
         onClick={() => setOpen(!open)}
       >

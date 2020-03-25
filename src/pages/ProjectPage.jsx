@@ -15,11 +15,19 @@ import Sidebar from '../components/projects/Sidebar'
 export default function ProjectPage() {
   const projects = useSelector((state) => state.projectReducer.projects)
   const [selectedProjectIndex, setSelectedProjectIndex] = useState(0)
+  const [isEdit, setIsEdit] = useState(false)
+  const [endpointToEdit, setEndpointToEdit] = useState(0)
   // runEndpoint(projects[0])
 
   const [show, setShow] = useState(false)
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
+
+  const showEditModal = (endpointId) => {
+    setEndpointToEdit(endpointId)
+    setIsEdit(true)
+    handleShow()
+  }
 
   return (
     <>
@@ -77,11 +85,16 @@ export default function ProjectPage() {
                         show={show}
                         handleClose={handleClose}
                         handleShow={handleShow}
+                        isEdit={isEdit}
+                        endpointToEdit={endpointToEdit}
                       />
                       <EndpointTable
                         endpoints={projects[selectedProjectIndex].endpoints}
                         projectId={selectedProjectIndex}
                         addEndpoint={() => handleShow()}
+                        showEditModal={(endpointId) =>
+                          showEditModal(endpointId)
+                        }
                       />
                       <div className="d-flex justify-content-around my-4">
                         <button
