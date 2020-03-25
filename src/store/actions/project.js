@@ -8,6 +8,19 @@ export const addNewProject = (project) => {
     }
   }
 }
+
+export const updateProject = (projectData, projectId) => {
+  console.log(projectData)
+  console.log(projectId)
+  return {
+    type: 'UPDATE_PROJECT',
+    payload: {
+      projectId,
+      projectData
+    }
+  }
+}
+
 export const addMdProject = response => {
   return {
     type: 'ADD_MD_TO_PROJECT',
