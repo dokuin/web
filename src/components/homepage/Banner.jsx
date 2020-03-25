@@ -11,13 +11,14 @@ const Banner = () => {
       className="section"
       style={{
         borderRadius: 0,
-        height: '90vh',
-        position: 'sticky',
+        position: 'static',
+        height:'90vh',
+        top:'0',
+        bottom:'0',
         width: '100%'
       }}
     >
 
-       
         <Col
         className="d-flex justify-content-end align-items-center" >
           <div>
@@ -38,9 +39,11 @@ const Banner = () => {
           <Link
             title="Create new project"
             to="/new-project"
-            className="banner-btn mr-2 font-weight-bold"
-            style={{ fontSize: '1.5em' }}
-          >
+
+            className="banner-btn btn-1 mr-2 font-weight-bold"
+            style={{ fontSize: '1.5em' ,}}
+            >
+
             Start Now
           </Link>
             </div>

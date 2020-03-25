@@ -40,11 +40,14 @@ const Header = () => {
         <div>
           <Nav style={{
             borderBottom:'2px solid grey',
+            paddingBottom: '6px',
             paddingRight:'30px',
             paddingLeft:'60px',}}>
             <Link to="/" className="router-link">
+
               <Nav.Link as="div" className="text-dark font-weight-bold">
                 Editor
+
               </Nav.Link>
             </Link>
 
@@ -70,6 +73,7 @@ const Header = () => {
               </Nav.Link>
             </Link>
             }
+
           </Nav>
         </div>
       </Container>
