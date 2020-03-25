@@ -25,7 +25,7 @@ const Header = () => {
       collapseOnSelect
       expand="lg"
       className="m-0 d-flex justify-content-center"
-      style={{ backgroundColor: '#232d3d' }}
+      style={{ backgroundColor: 'tranparent' }}
       sticky="top"
     >
       <Container className="m-0 d-flex justify-content-between">
@@ -38,16 +38,29 @@ const Header = () => {
         </div>
 
         <div>
-          <Nav className="">
+          <Nav style={{
+            borderBottom:'2px solid grey',
+            paddingRight:'30px',
+            paddingLeft:'60px',}}>
             <Link to="/" className="router-link">
+<<<<<<< HEAD
               <Nav.Link as="div" className="text-white font-weight-bold">
                 <HoverText className="my-auto">Editor</HoverText>
+=======
+              <Nav.Link as="div" className="text-dark font-weight-bold">
+                Editor
+>>>>>>> navbar landing page
               </Nav.Link>
             </Link>
 
             <Link to="/" className="router-link">
+<<<<<<< HEAD
               <Nav.Link as="div" className="text-white font-weight-bold">
                 <HoverText className="my-auto">Dokuin CLI</HoverText>
+=======
+              <Nav.Link as="div" className="text-dark font-weight-bold">
+                Dokuin CLI
+>>>>>>> navbar landing page
               </Nav.Link>
             </Link>
 
