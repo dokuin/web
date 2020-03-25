@@ -67,6 +67,7 @@ export default function AddEndpointModal(props) {
   const toSaveEndpoint = () => {
     const { projectId } = props
     let endpoint = {
+      httpRequest: httpRequest,
       path: path,
       description: reqDescription,
       query: useQuery ? JSON.stringify(query) : false,

@@ -90,6 +90,7 @@ const Sidebar = (props) => {
                           'You are about to delete your project from project list. Do you agree?'
                         }
                         ok={() => deleteProject(i)}
+                        cancel={() => setOpenDialog(false)}
                       />
                     </span>
                   </ListItem>

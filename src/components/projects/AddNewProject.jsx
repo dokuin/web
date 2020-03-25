@@ -16,7 +16,6 @@ export default function ProjectsDetailPage() {
   const [projectBaseURL, setProjectBaseURL] = useState('')
   const [projectAuthor, setProjectAuthor] = useState('')
   const [projectDescription, setProjectDescription] = useState('')
-
   const submit = (e) => {
     e.preventDefault()
     const project = {
