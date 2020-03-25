@@ -19,6 +19,7 @@ const Confirm = (props) => {
 
   const handleClose = () => {
     setOpen(false)
+    props.cancel()
   }
 
   return (
@@ -46,7 +47,7 @@ const Confirm = (props) => {
           >
             Agree
           </Button>
-          <Button color="primary" onClick={handleClose}>
+          <Button color="primary" onClick={() => handleClose()}>
             Disagree
           </Button>
         </DialogActions>

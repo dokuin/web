@@ -49,6 +49,34 @@ export const addEndpoint = (endpoint, projectId) => {
   }
 }
 
+export const editEndpoint = (endpoint, endpointId, projectId) => {
+  return (dispatch, getState) => {
+    let projectList = [...getState().projectReducer.projects]
+    projectList[projectId].endpoints[endpointId] = endpoint
+    dispatch({
+      type: 'UPDATE_ENDPOINT',
+      payload: {
+        projectList
+      }
+    })
+  }
+}
+
+export const deleteEndpoint = (endpointId, projectId) => {
+  console.log(endpointId)
+  console.log(projectId)
+  return (dispatch, getState) => {
+    let projectList = [...getState().projectReducer.projects]
+    projectList[projectId].endpoints.splice(endpointId, 1)
+    dispatch({
+      type: 'DELETE_ENDPOINT',
+      payload: {
+        projectList
+      }
+    })
+  }
+}
+
 export const addMdProject = (response) => {
   return {
     type: 'ADD_MD_TO_PROJECT',

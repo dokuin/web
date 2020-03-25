@@ -72,27 +72,26 @@ export default function ProjectPage() {
                   </div>
                   <Row>
                     <Col md={{ span: 10, offset: 1 }}>
-                      <div className="d-flex justify-content-around mb-4">
-                        <button
-                          className="neumorph-btn px-3 py-2"
-                          onClick={handleShow}
-                        >
-                          Add Endpoint
-                        </button>
-                        <button
-                          className="neumorph-btn px-3 py-2"
-                          onClick={handleShow}
-                        >
-                          Create Markdown
-                        </button>
-                      </div>
                       <AddEndpointModal
                         projectId={selectedProjectIndex}
                         show={show}
                         handleClose={handleClose}
                         handleShow={handleShow}
                       />
-                      <EndpointTable />
+                      <EndpointTable
+                        endpoints={projects[selectedProjectIndex].endpoints}
+                        projectId={selectedProjectIndex}
+                        addEndpoint={() => handleShow()}
+                      />
+                      <div className="d-flex justify-content-around my-4">
+                        <button
+                          className="neumorph-btn px-3 py-2"
+                          style={{ fontSize: '1.5em' }}
+                          onClick={handleShow}
+                        >
+                          Create Markdown
+                        </button>
+                      </div>
                     </Col>
                   </Row>
                 </Fade>
