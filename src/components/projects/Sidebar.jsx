@@ -48,8 +48,8 @@ const Sidebar = (props) => {
             </h4>
           </div>
           <ul>
-            {projects.map((project) => {
-              return <li>{project.name}</li>
+            {projects.map((project, i) => {
+              return <li key={i}>{project.name}</li>
             })}
           </ul>
         </div>

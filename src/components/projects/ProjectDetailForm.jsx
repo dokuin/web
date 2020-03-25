@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
 import { Row, Col, Form } from 'react-bootstrap'
-import { MdClear, MdEdit, MdSave } from 'react-icons/md'
+import { MdAdd, MdClear, MdEdit, MdSave } from 'react-icons/md'
 
 import { updateProject } from '../../store/actions/project'
 
 const ProjectDetailForm = (props) => {
+  const $router = useHistory()
   const { project, projectId } = props
   const dispatch = useDispatch()
 
@@ -42,7 +44,18 @@ const ProjectDetailForm = (props) => {
         style={{ padding: '20px' }}
         md={{ span: 8, offset: 2 }}
       >
-        <div className="neumorph-card d-flex justify-content-between p-2 mb-5">
+        <div className="d-flex justify-content-end mt-2 mb-4">
+          <button
+            title="Add New Project"
+            className="neumorph-btn icon p-2 d-flex align-items-center"
+            style={{ backgroundColor: '#d5dbf6' }}
+            onClick={() => $router.push('/new-project')}
+          >
+            <MdAdd size="2rem" />
+            Add New Project
+          </button>
+        </div>
+        <div className="neumorph-card d-flex justify-content-between mt-0 p-2 mb-5">
           <h2 className="ml-3 my-auto">Project Detail</h2>
           <div className="d-flex align-items-center">
             {disable ? (
@@ -72,7 +85,6 @@ const ProjectDetailForm = (props) => {
             )}
           </div>
         </div>
-
         <Form.Group>
           <Form.Row>
             <Form.Label column lg={3}>
@@ -89,7 +101,6 @@ const ProjectDetailForm = (props) => {
             </Col>
           </Form.Row>
         </Form.Group>
-
         <Form.Group>
           <Form.Row>
             <Form.Label column lg={3}>
@@ -106,7 +117,6 @@ const ProjectDetailForm = (props) => {
             </Col>
           </Form.Row>
         </Form.Group>
-
         <Form.Group>
           <Form.Row>
             <Form.Label column lg={3}>
@@ -123,7 +133,6 @@ const ProjectDetailForm = (props) => {
             </Col>
           </Form.Row>
         </Form.Group>
-
         <Form.Group>
           <Form.Row>
             <Form.Label column lg={3}>

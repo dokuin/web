@@ -4,11 +4,13 @@ import { Link } from 'react-router-dom'
 
 import { Container, Row, Col } from 'react-bootstrap'
 import { Slide, Fade } from 'react-reveal'
-import { runEndpoint } from '../store/actions/project'
+
 import EndpointTable from '../components/projects/EndpointTable'
 import AddEndpointModal from '../components/projects/AddEndpointModal'
 import ProjectDetailForm from '../components/projects/ProjectDetailForm'
 import Sidebar from '../components/projects/Sidebar'
+
+import { runEndpoint } from '../store/actions/project'
 
 export default function ProjectPage() {
   const projects = useSelector((state) => state.projectReducer.projects)
@@ -18,6 +20,9 @@ export default function ProjectPage() {
   const [show, setShow] = useState(false)
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
+
+  console.log(projects)
+
   return (
     <>
       <Slide duration={500} bottom>
@@ -58,7 +63,7 @@ export default function ProjectPage() {
                   setSelectedProjectIndex(project)
                 }}
               />
-              <Container style={{ minHeight: '90vh' }} fluid>
+              <Container className="mb-5" style={{ minHeight: '90vh' }} fluid>
                 <Fade>
                   <div className="my-5">
                     <ProjectDetailForm
@@ -83,6 +88,7 @@ export default function ProjectPage() {
                         </button>
                       </div>
                       <AddEndpointModal
+                        projectId={selectedProjectIndex}
                         show={show}
                         handleClose={handleClose}
                         handleShow={handleShow}
