@@ -23,7 +23,8 @@ export default function ProjectsDetailPage() {
       name: projectName,
       baseUrl: projectBaseURL,
       author: projectAuthor,
-      description: projectDescription
+      description: projectDescription,
+      endpoints: []
     }
     dispatch(addNewProject(project))
     push('/projects')

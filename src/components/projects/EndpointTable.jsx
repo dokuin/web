@@ -14,7 +14,7 @@ export default function EndpointTable() {
       >
         <thead>
           <tr>
-            <th>index</th>
+            <th>No.</th>
             <th>HTTP Method</th>
             <th>Path</th>
             <th>Description</th>
