@@ -1,5 +1,16 @@
 const initialState = {
-  projects: []
+  projects: [
+    {
+      name: "tokemedia",
+      description: "practice project",
+      baseURL: "https://sunday-store.herokuapp.com/api",
+      author: "oasis",
+      endpoints: [{
+        method: "get",
+        path: "products",
+        description: "get all product",
+      }]
+    }]
 }
 
 function project(state = initialState, action) {
@@ -8,6 +19,15 @@ function project(state = initialState, action) {
       return {
         ...state,
         projects: [...state.projects, action.payload.project]
+      }
+    case 'ADD_MD_TO_PROJECT':
+      const copyProjects = [...state.projects]
+      const cloneProject = copyProjects.find(el => el.name === action.payload.responses.name)
+      cloneProject.mdFile = action.responses
+      return {
+        ...state,
+        ...state.projects.md = action.payload.responses,
+        projects: [...state.projects]
       }
 
     default:
