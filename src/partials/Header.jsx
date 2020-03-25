@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { useState} from 'react'
 import { Navbar, Nav, Container, Image, Button } from 'react-bootstrap'
-import { Link, useLocation } from 'react-router-dom'
-
+import { Link, useLocation, useHistory } from 'react-router-dom'
 import DokuinLogo from '../assets/dokuin-logo.png'
 
 import styled from 'styled-components'
@@ -17,7 +16,17 @@ const HoverText = styled.p`
 
 const Header = () => {
     const { pathname } = useLocation()
- 
+    const history = useHistory()
+    const [modalShow, setModalShow] = useState(false);
+
+
+    const handleLogut = () =>{
+      localStorage.clear()
+      history.push('/')
+    }
+
+  
+
   return (
     pathname !== '/login'  &&
     <Navbar
@@ -25,7 +34,7 @@ const Header = () => {
       collapseOnSelect
       expand="lg"
       className="m-0 d-flex justify-content-center"
-      style={{ backgroundColor: 'tranparent' }}
+      style={{ backgroundColor: 'white', }}
       sticky="top"
     >
       <Container className="m-0 d-flex justify-content-between">
@@ -64,7 +73,7 @@ const Header = () => {
                 Profile
               </Nav.Link>
             </Link>
-            <Button style={{ marginLeft:'20px'}} variant="outline-secondary" size="sm">Logout</Button>{' '}
+            <Button style={{ marginLeft:'20px'}} onClick={()=>{handleLogut()}} variant="outline-secondary" size="sm">Logout</Button>{' '}
               </>
               :
               <Link to="/login" className="router-link">

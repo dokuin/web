@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { Provider as StoreProvider } from 'react-redux'
 import {
-  BrowserRouter as Router,
+  Router,
   Route,
   Switch,
   Redirect
 } from 'react-router-dom'
+import { createBrowserHistory } from 'history'
 import store from './store'
 
 import Header from './partials/Header'
@@ -32,13 +33,15 @@ const AuthenticationRoute = ({component: Component,...rest}) =>(
   />
 )
 
+const history = createBrowserHistory()
 
 function App() {
 
 
+
   return (
     <StoreProvider store={store}>
-      <Router>
+      <Router history={history}>
         <Header />
         <Switch>
           <Route exact path="/" component={HomePage} />

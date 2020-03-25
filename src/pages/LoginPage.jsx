@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 import { makeStyles, withStyles } from '@material-ui/core/styles'
 import { Image } from 'react-bootstrap'
@@ -41,9 +41,14 @@ export default function() {
   const [imageUrl, setimageUrl] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const history = useHistory()
 
   const showRegister = () => {
     setRegister(!register)
+  }
+
+  const handleSubmit = () => {
+    localStorage.setItem('token','jsdjsdjsjd')
   }
 
   return (
@@ -79,22 +84,7 @@ export default function() {
           }}
           className="d-flex flex-column align-items-center justify-content-center"
         >
-          <Link to="/">
-            <Button
-              variant="outlined"
-              color="primary"
-              className={classes.button}
-              style={{
-                position: 'absolute',
-                top: '0',
-                left: '0',
-                marginTop: '-10vh'
-              }}
-            >
-              <IoMdArrowBack className="mr-2" />
-              BACK
-            </Button>
-          </Link>
+     
           <h1
             style={{
               width: '100%',
@@ -153,6 +143,7 @@ export default function() {
                 variant="contained"
                 color="primary"
                 className={classes.margin}
+                onSubmit={()=> handleSubmit()}
               >
                 {register ? 'Register' : 'Login'}
               </ColorButton>
@@ -187,6 +178,18 @@ export default function() {
                 </h6>
               )}
             </div>
+                 <Link to="/">
+            <Button
+              variant="outlined"
+              color="primary"
+              style={{
+                marginTop: '10vh'
+              }}
+            >
+              <IoMdArrowBack className="mr-2" />
+              BACK
+            </Button>
+          </Link>
           </div>
         </div>
       </Fade>
