@@ -8,7 +8,7 @@ import Confirm from '../Confirm'
 import { deleteEndpoint } from '../../store/actions/project'
 
 export default function EndpointTable(props) {
-  const { endpoints, projectId } = props
+  const { endpoints, projectId, showEditModal } = props
   const dispatch = useDispatch()
 
   const [showConfirm, setShowConfirm] = useState()
@@ -77,6 +77,7 @@ export default function EndpointTable(props) {
                           title="Edit endpoint"
                           size="2em"
                           className="neumorph-btn icon p-1 mr-2"
+                          onClick={() => showEditModal(i)}
                         />
                         <MdDelete
                           title="Delete endpoint"
