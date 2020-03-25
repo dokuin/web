@@ -10,18 +10,16 @@ import AddEndpointModal from '../components/projects/AddEndpointModal'
 import ProjectDetailForm from '../components/projects/ProjectDetailForm'
 import Sidebar from '../components/projects/Sidebar'
 
-import { runEndpoint } from '../store/actions/project'
+// import { runEndpoint } from '../store/actions/project'
 
 export default function ProjectPage() {
   const projects = useSelector((state) => state.projectReducer.projects)
   const [selectedProjectIndex, setSelectedProjectIndex] = useState(0)
-  runEndpoint(projects[0])
+  // runEndpoint(projects[0])
 
   const [show, setShow] = useState(false)
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
-
-  console.log(projects)
 
   return (
     <>
@@ -59,8 +57,9 @@ export default function ProjectPage() {
             <>
               <Sidebar
                 projects={projects}
-                selectProject={(project) => {
-                  setSelectedProjectIndex(project)
+                selectProject={(id) => {
+                  console.log(id)
+                  setSelectedProjectIndex(id)
                 }}
               />
               <Container className="mb-5" style={{ minHeight: '90vh' }} fluid>

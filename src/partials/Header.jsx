@@ -6,6 +6,7 @@ import DokuinLogo from '../assets/dokuin-logo.png'
 
 import styled from 'styled-components'
 
+// eslint-disable-next-line
 const HoverText = styled.p`
   color: white;
   :hover {
@@ -16,68 +17,78 @@ const HoverText = styled.p`
 `
 
 const Header = () => {
-    const { pathname } = useLocation()
- 
+  const { pathname } = useLocation()
+
   return (
-    pathname !== '/login'  &&
-    <Navbar
-      id="navigation"
-      collapseOnSelect
-      expand="lg"
-      className="m-0 d-flex justify-content-center"
-      style={{ backgroundColor: 'tranparent' }}
-      sticky="top"
-    >
-      <Container className="m-0 d-flex justify-content-between">
-        <div>
-          <Link to="/" className="router-link">
-            <Navbar.Brand as="div" href="#">
-              <Image src={DokuinLogo} height={50} />
-            </Navbar.Brand>
-          </Link>
-        </div>
-
-        <div>
-          <Nav style={{
-            borderBottom:'2px solid grey',
-            paddingBottom: '6px',
-            paddingRight:'30px',
-            paddingLeft:'60px',}}>
+    pathname !== '/login' && (
+      <Navbar
+        id="navigation"
+        collapseOnSelect
+        expand="lg"
+        className="m-0 d-flex justify-content-center"
+        style={{ background: '#d5dbf6' }}
+        sticky="top"
+      >
+        <Container className="m-0 d-flex justify-content-between">
+          <div>
             <Link to="/" className="router-link">
-
-              <Nav.Link as="div" className="text-dark font-weight-bold">
-                Editor
-
-              </Nav.Link>
+              <Navbar.Brand as="div" href="#">
+                <Image src={DokuinLogo} height={50} />
+              </Navbar.Brand>
             </Link>
+          </div>
 
-            <Link to="/" className="router-link">
-              <Nav.Link as="div" className="text-dark font-weight-bold">
-                Dokuin CLI
-              </Nav.Link>
-            </Link>
-            {
-              localStorage.getItem('token') ?
-              <>
-              <Link to="/profile" className="router-link">
-              <Nav.Link as="div" className="text-dark font-weight-bold">
-                Profile
-              </Nav.Link>
-            </Link>
-            <Button style={{ marginLeft:'20px'}} variant="outline-secondary" size="sm">Logout</Button>{' '}
-              </>
-              :
-              <Link to="/login" className="router-link">
-              <Nav.Link as="div" className="text-dark font-weight-bold">
-                Login
-              </Nav.Link>
-            </Link>
-            }
+          <div>
+            <Nav
+              style={{
+                borderBottom: '2px solid grey',
+                paddingBottom: '6px',
+                paddingRight: '30px',
+                paddingLeft: '60px'
+              }}
+            >
+              {localStorage.getItem('token') ? (
+                <Link to="/projects" className="router-link">
+                  <Nav.Link as="div" className="text-dark font-weight-bold">
+                    Projects
+                  </Nav.Link>
+                </Link>
+              ) : (
+                ''
+              )}
 
-          </Nav>
-        </div>
-      </Container>
-    </Navbar>
+              <Link to="/" className="router-link">
+                <Nav.Link as="div" className="text-dark font-weight-bold">
+                  Dokuin CLI
+                </Nav.Link>
+              </Link>
+              {localStorage.getItem('token') ? (
+                <>
+                  <Link to="/profile" className="router-link">
+                    <Nav.Link as="div" className="text-dark font-weight-bold">
+                      Profile
+                    </Nav.Link>
+                  </Link>
+                  <Button
+                    style={{ marginLeft: '20px' }}
+                    variant="outline-secondary"
+                    size="sm"
+                  >
+                    Logout
+                  </Button>
+                </>
+              ) : (
+                <Link to="/login" className="router-link">
+                  <Nav.Link as="div" className="text-dark font-weight-bold">
+                    Login
+                  </Nav.Link>
+                </Link>
+              )}
+            </Nav>
+          </div>
+        </Container>
+      </Navbar>
+    )
   )
 }
 

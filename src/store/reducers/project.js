@@ -16,6 +16,9 @@ function project(state = initialState, action) {
       projectList[projectId] = projectData
       return { ...state, projects: projectList }
 
+    case 'DELETE_PROJECT':
+      return { ...state, projects: action.payload.projectList }
+
     case 'ADD_ENDPOINT':
       return { ...state, projects: action.payload.projectList }
 
