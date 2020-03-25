@@ -1,5 +1,20 @@
 import { RunEndpoints, ConvertMd } from 'dokuinjs'
 
+import Axios from 'axios'
+
+const axios = Axios.create({
+  baseURL: 'https://localhost:4000'
+})
+
+export const getProjectList = async () => {
+  try {
+    const { data } = axios.get('/projects')
+    console.log(data)
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 export const addNewProject = (project) => {
   return {
     type: 'ADD_NEW_PROJECT',

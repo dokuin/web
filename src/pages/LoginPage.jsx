@@ -1,14 +1,17 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useMutation } from '@apollo/react-hooks'
+import { useDispatch } from 'react-redux'
 
 import { makeStyles, withStyles } from '@material-ui/core/styles'
 import { Image } from 'react-bootstrap'
 import { Button, TextField } from '@material-ui/core'
 import { red } from '@material-ui/core/colors'
 import { Fade } from 'react-reveal'
-
 import { IoMdArrowBack } from 'react-icons/io'
+
 import LoginBg from '../assets/LoginBg.png'
+import { SIGN_IN, SIGN_UP } from '../schemas/user'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,14 +39,55 @@ const ColorButton = withStyles((theme) => ({
 
 export default function() {
   const classes = useStyles()
-  const [register, setRegister] = useState(false)
-  const [Fname, setName] = useState('')
-  const [imageUrl, setimageUrl] = useState('')
+  const dispatch = useDispatch
+  const [onRegister, setOnRegister] = useState(false)
+  const [fullname, setFullname] = useState('')
+  const [username, setUsername] = useState('')
+  const [profilePic, setProfilePic] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
+  const [signIn] = useMutation(SIGN_IN)
+  const [signUp] = useMutation(SIGN_UP)
+
   const showRegister = () => {
-    setRegister(!register)
+    setFullname('')
+    setUsername('')
+    setProfilePic('')
+    setEmail('')
+    setPassword('')
+    setOnRegister(!onRegister)
+  }
+
+  const login = async () => {
+    try {
+      const response = await signIn({
+        variables: {
+          email: email,
+          password: password
+        }
+      })
+      console.log(response)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const register = async () => {
+    try {
+      const response = await signUp({
+        variables: {
+          fullName: fullname,
+          username: username,
+          profilePicURL: profilePic,
+          email: email,
+          password: password
+        }
+      })
+      console.log(response)
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   return (
@@ -99,10 +143,10 @@ export default function() {
             style={{
               width: '100%',
               borderBottom: '2px solid red',
-              marginTop: register ? '2em' : 'initial'
+              marginTop: onRegister ? '2em' : 'initial'
             }}
           >
-            {register ? 'REGISTER' : 'LOGIN'}
+            {onRegister ? 'REGISTER' : 'LOGIN'}
           </h1>
           <div
             className={classes.root}
@@ -110,16 +154,33 @@ export default function() {
               padding: '30px'
             }}
           >
-            <form className={classes.root} noValidate autoComplete="off">
-              {register && (
+            <form
+              className={classes.root}
+              noValidate
+              autoComplete="off"
+              onSubmit={(e) => {
+                e.preventDefault()
+                onRegister ? register() : login()
+              }}
+            >
+              {onRegister && (
                 <>
                   <TextFld
                     id="standard-secondary"
                     fullWidth
                     label="Full Name"
                     color="secondary"
-                    value={Fname}
-                    onChange={(e) => setName(e.target.value)}
+                    value={fullname}
+                    onChange={(e) => setFullname(e.target.value)}
+                  />
+
+                  <TextFld
+                    id="standard-secondary"
+                    fullWidth
+                    label="Username"
+                    color="secondary"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                   />
 
                   <TextFld
@@ -127,8 +188,8 @@ export default function() {
                     fullWidth
                     label="Picture url"
                     color="secondary"
-                    value={imageUrl}
-                    onChange={(e) => setimageUrl(e.target.value)}
+                    value={profilePic}
+                    onChange={(e) => setProfilePic(e.target.value)}
                   />
                 </>
               )}
@@ -152,9 +213,10 @@ export default function() {
               <ColorButton
                 variant="contained"
                 color="primary"
+                type="submit"
                 className={classes.margin}
               >
-                {register ? 'Register' : 'Login'}
+                {onRegister ? 'Register' : 'Login'}
               </ColorButton>
             </form>
             <div
@@ -163,7 +225,7 @@ export default function() {
                 borderTop: '2px solid red'
               }}
             >
-              {register ? (
+              {onRegister ? (
                 <h6 className="mt-3">
                   Already have an account ?{' '}
                   <span
