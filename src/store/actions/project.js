@@ -10,12 +10,21 @@ export const addNewProject = (project) => {
 }
 
 export const updateProject = (projectData, projectId) => {
-  return {
-    type: 'UPDATE_PROJECT',
-    payload: {
-      projectId,
-      projectData
+  return (dispatch, getState) => {
+    let projectList = [...getState().projectReducer.projects]
+    projectList[projectId] = {
+      name: projectData.name,
+      baseUrl: projectData.baseURL,
+      author: projectData.author,
+      description: projectData.description,
+      endpoints: projectList[projectId].endpoints
     }
+    dispatch({
+      type: 'UPDATE_PROJECT',
+      payload: {
+        projectList
+      }
+    })
   }
 }
 
@@ -33,7 +42,6 @@ export const deleteProject = (projectId) => {
 }
 
 export const addEndpoint = (endpoint, projectId) => {
-  console.log(endpoint)
   return (dispatch, getState) => {
     let projectList = getState().projectReducer.projects
     projectList[projectId].endpoints = [

@@ -67,7 +67,6 @@ export default function ProjectsDetailPage() {
                   <Form.Control
                     type="text"
                     placeholder="sunday-store.herokuapp.com"
-                    required
                     value={projectBaseURL}
                     onChange={(e) => {
                       setProjectBaseURL(e.target.value)
@@ -79,7 +78,6 @@ export default function ProjectsDetailPage() {
                   <Form.Control
                     type="text"
                     placeholder="Oasis"
-                    required
                     value={projectAuthor}
                     onChange={(e) => {
                       setProjectAuthor(e.target.value)

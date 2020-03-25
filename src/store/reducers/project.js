@@ -5,17 +5,13 @@ const initialState = {
 function project(state = initialState, action) {
   switch (action.type) {
     case 'ADD_NEW_PROJECT':
-      console.log(action.payload.project)
       return {
         ...state,
         projects: [...state.projects, action.payload.project]
       }
 
     case 'UPDATE_PROJECT':
-      const { projectData, projectId } = action.payload
-      let projectList = [...state.projects]
-      projectList[projectId] = projectData
-      return { ...state, projects: projectList }
+      return { ...state, projects: action.payload.projectList }
 
     case 'DELETE_PROJECT':
       return { ...state, projects: action.payload.projectList }

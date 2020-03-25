@@ -33,7 +33,6 @@ const Sidebar = (props) => {
   const [openDialog, setOpenDialog] = useState(false)
 
   const select = (id) => {
-    console.log(id)
     props.selectProject(id)
   }
 
@@ -71,6 +70,7 @@ const Sidebar = (props) => {
               return (
                 <>
                   <ListItem
+                    key={i}
                     className="d-flex justify-content-between mx-auto"
                     button
                   >
@@ -81,7 +81,10 @@ const Sidebar = (props) => {
                       <MdDelete
                         size="2em"
                         className="neumorph-btn icon p-1"
-                        onClick={() => setOpenDialog(true)}
+                        onClick={() => {
+                          console.log(i)
+                          setOpenDialog(true)
+                        }}
                       />
                       <Confirm
                         confirm={openDialog}
@@ -89,7 +92,9 @@ const Sidebar = (props) => {
                         msg={
                           'You are about to delete your project from project list. Do you agree?'
                         }
-                        ok={() => deleteProject(i)}
+                        ok={() => {
+                          deleteProject(i)
+                        }}
                         cancel={() => setOpenDialog(false)}
                       />
                     </span>

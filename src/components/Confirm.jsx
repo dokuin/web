@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import {
   Dialog,
   DialogTitle,
@@ -9,24 +9,16 @@ import {
 } from '@material-ui/core'
 
 const Confirm = (props) => {
-  const [open, setOpen] = useState(false)
-
-  useEffect(() => {
-    if (props.confirm) {
-      setOpen(true)
-    }
-  }, [props.confirm, open])
-
   const handleClose = () => {
-    setOpen(false)
     props.cancel()
   }
 
   return (
     <>
       <Dialog
-        open={open}
+        open={props.confirm}
         onClose={handleClose}
+        onExit={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
