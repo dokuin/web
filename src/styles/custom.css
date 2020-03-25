@@ -1,17 +1,20 @@
-.banner {
-  background: url('../assets/Group\ 1.png');
-  background-size: cover;
+/* .banner {
+  background: url('../assets/landing.jpg');
   background-repeat: no-repeat;
-  background-position: center;
-  height: 25em;
-}
+  object-position: bottom;
+  background-position: center center;
+  object-fit: cover;
+  height: 100%;
+} */
 
 .banner-btn {
   text-decoration: none;
   padding: 1.5vh 1.5vw;
+  margin-top: 10px;
   border-radius: 1vh;
   color: white;
   background-color: #31475f;
+  box-shadow: 0.1em 0.1em 10px #9195a7, -0.1em -0.1em 10px #eff0f6;
 }
 
 .banner-btn:hover {
@@ -51,5 +54,8 @@
 
 .icon:hover {
   cursor: pointer;
-  color: #31475f;
+}
+
+.icon:active {
+  color: #31475f !important;
 }

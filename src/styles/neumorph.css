@@ -1,0 +1,27 @@
+.neumorph-card {
+  border-radius: 2em;
+  background: #d5dbf6;
+  box-shadow: 0.2em 0.2em 0.4em #b5bad1, -0.2em -0.2em 0.4em #f5fcff;
+}
+
+.neumorph-btn {
+  transition: 0.3s;
+  border-width: 0;
+  border-radius: 1em;
+  background: white;
+  box-shadow: 0.1em 0.1em 0.4em #b5bad1, -0.1em -0.1em 0.4em #ffffff;
+}
+
+.neumorph-btn:hover {
+  background: linear-gradient(145deg, #ffffff, #e6e6e6);
+}
+
+.neumorph-btn:focus {
+  outline: 0;
+}
+
+.neumorph-btn:active {
+  /* transform: translateY(0.1em);   */
+  box-shadow: inset 0.1em 0.1em 0.4em #9195a74f,
+    inset -0.1em -0.1em 0.4em #ffffff;
+}

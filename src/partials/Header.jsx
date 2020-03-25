@@ -1,7 +1,19 @@
 import React from 'react'
-import { Navbar, Nav, Container, Image } from 'react-bootstrap'
+import { Navbar, Nav, Container, Image, Button } from 'react-bootstrap'
 import { Link, useLocation } from 'react-router-dom'
-import DokuinLogo from '../assets/logo dokuin.png'
+
+import DokuinLogo from '../assets/dokuin-logo.png'
+
+import styled from 'styled-components'
+
+const HoverText = styled.p`
+  color: white;
+  :hover {
+    border-bottom: 2px solid #59adb5cc;
+
+    cursor: pointer;
+  }
+`
 
 const Header = () => {
     const { pathname } = useLocation()
@@ -13,7 +25,7 @@ const Header = () => {
       collapseOnSelect
       expand="lg"
       className="m-0 d-flex justify-content-center"
-      style={{ backgroundColor: '#232d3d' }}
+      style={{ backgroundColor: 'tranparent' }}
       sticky="top"
     >
       <Container className="m-0 d-flex justify-content-between">
@@ -26,24 +38,42 @@ const Header = () => {
         </div>
 
         <div>
-          <Nav className="">
+          <Nav style={{
+            borderBottom:'2px solid grey',
+            paddingBottom: '6px',
+            paddingRight:'30px',
+            paddingLeft:'60px',}}>
             <Link to="/" className="router-link">
-              <Nav.Link as="div" className="text-white font-weight-bold">
+
+              <Nav.Link as="div" className="text-dark font-weight-bold">
                 Editor
+
               </Nav.Link>
             </Link>
 
             <Link to="/" className="router-link">
-              <Nav.Link as="div" className="text-white font-weight-bold">
+              <Nav.Link as="div" className="text-dark font-weight-bold">
                 Dokuin CLI
               </Nav.Link>
             </Link>
-
-            <Link to="/login" className="router-link">
-              <Nav.Link as="div" className="text-white font-weight-bold">
-                {localStorage.getItem('token') ? 'Profile' : 'Login'}
+            {
+              localStorage.getItem('token') ?
+              <>
+              <Link to="/profile" className="router-link">
+              <Nav.Link as="div" className="text-dark font-weight-bold">
+                Profile
               </Nav.Link>
             </Link>
+            <Button style={{ marginLeft:'20px'}} variant="outline-secondary" size="sm">Logout</Button>{' '}
+              </>
+              :
+              <Link to="/login" className="router-link">
+              <Nav.Link as="div" className="text-dark font-weight-bold">
+                Login
+              </Nav.Link>
+            </Link>
+            }
+
           </Nav>
         </div>
       </Container>

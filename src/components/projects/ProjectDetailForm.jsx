@@ -1,49 +1,78 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+
 import { Row, Col, Form } from 'react-bootstrap'
-// import { Button } from 'react-bootstrap'
 import { MdClear, MdEdit, MdSave } from 'react-icons/md'
 
-const ProjectDetailForm = () => {
-  const [disable, setDisable] = useState(true)
+import { updateProject } from '../../store/actions/project'
 
-  const disableForm = () => {
+const ProjectDetailForm = (props) => {
+  const { project, projectId } = props
+  const dispatch = useDispatch()
+
+  const [disable, setDisable] = useState(true)
+  const [projectName, setProjectName] = useState('')
+  const [projectBaseURL, setProjectBaseURL] = useState('')
+  const [projectAuthor, setProjectAuthor] = useState('')
+  const [projectDescription, setProjectDescription] = useState('')
+
+  const getEditReady = () => {
+    setProjectName(project.name)
+    setProjectBaseURL(project.baseUrl)
+    setProjectAuthor(project.author)
+    setProjectDescription(project.description)
+    setDisable(!disable)
+  }
+
+  const saveProject = () => {
+    const projectData = {
+      name: projectName,
+      baseUrl: projectBaseURL,
+      author: projectAuthor,
+      description: projectDescription
+    }
+    dispatch(updateProject(projectData, projectId))
     setDisable(!disable)
   }
 
   return (
     <Row>
-      <Col style={{ padding: '20px' }} md={{ span: 8, offset: 2 }}>
-        <div className="d-flex justify-content-between align-items-center">
-          <h2>Project Detail</h2>
+      <Col
+        className="neumorph-card"
+        style={{ padding: '20px' }}
+        md={{ span: 8, offset: 2 }}
+      >
+        <div className="neumorph-card d-flex justify-content-between p-2 mb-5">
+          <h2 className="ml-3 my-auto">Project Detail</h2>
           <div className="d-flex align-items-center">
             {disable ? (
               <MdEdit
-                size="1.5em"
-                className="icon my-0"
+                size="2em"
+                className="neumorph-btn icon p-1 my-0 mr-3"
                 title="Edit Detail"
-                onClick={() => disableForm()}
+                onClick={() => getEditReady()}
               />
             ) : (
               <MdSave
-                size="1.5em"
-                className="icon my-0 mr-2"
+                size="2em"
+                className="neumorph-btn icon p-1 my-0 mr-5"
                 title="Save"
-                onClick={() => disableForm()}
+                onClick={() => saveProject()}
               />
             )}
             {!disable ? (
               <MdClear
-                size="1.5em"
-                className="icon my-0"
+                size="2em"
+                className="neumorph-btn icon p-1 my-0 mr-2"
                 title="Cancel Edit"
-                onClick={() => disableForm()}
+                onClick={() => setDisable(!disable)}
               />
             ) : (
               <p></p>
             )}
           </div>
         </div>
-        <hr className="mx-0 mt-1 mb-2" />
+
         <Form.Group>
           <Form.Row>
             <Form.Label column lg={3}>
@@ -53,7 +82,8 @@ const ProjectDetailForm = () => {
               <Form.Control
                 type="text"
                 placeholder="Large text"
-                value="tokomedia"
+                value={disable ? project.name : projectName}
+                onChange={(e) => setProjectName(e.target.value)}
                 disabled={disable}
               />
             </Col>
@@ -69,7 +99,8 @@ const ProjectDetailForm = () => {
               <Form.Control
                 type="text"
                 placeholder="Large text"
-                value="https://localhost:3000"
+                value={disable ? project.baseUrl : projectBaseURL}
+                onChange={(e) => setProjectBaseURL(e.target.value)}
                 disabled={disable}
               />
             </Col>
@@ -85,7 +116,8 @@ const ProjectDetailForm = () => {
               <Form.Control
                 type="text"
                 placeholder="Large text"
-                value="Oasis"
+                value={disable ? project.author : projectAuthor}
+                onChange={(e) => setProjectAuthor(e.target.value)}
                 disabled={disable}
               />
             </Col>
@@ -102,7 +134,8 @@ const ProjectDetailForm = () => {
                 type="text"
                 as="textarea"
                 placeholder="Large text"
-                value="It is practice project for REST API"
+                value={disable ? project.description : projectDescription}
+                onChange={(e) => setProjectDescription(e.target.value)}
                 disabled={disable}
               />
             </Col>
