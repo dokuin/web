@@ -53,14 +53,23 @@ const Header = () => {
                 Dokuin CLI
               </Nav.Link>
             </Link>
-
-            <Link to="/login" className="router-link">
-              <Nav.Link as="div" className="text-white font-weight-bold">
-                <HoverText className="my-auto">
-                  {localStorage.getItem('token') ? 'Profile' : 'Login'}
-                </HoverText>
+            {
+              localStorage.getItem('token') ?
+              <>
+              <Link to="/profile" className="router-link">
+              <Nav.Link as="div" className="text-dark font-weight-bold">
+                Profile
               </Nav.Link>
             </Link>
+            <Button style={{ marginLeft:'20px'}} variant="outline-secondary" size="sm">Logout</Button>{' '}
+              </>
+              :
+              <Link to="/login" className="router-link">
+              <Nav.Link as="div" className="text-dark font-weight-bold">
+                Login
+              </Nav.Link>
+            </Link>
+            }
           </Nav>
         </div>
       </Container>
