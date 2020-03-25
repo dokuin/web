@@ -26,7 +26,7 @@ import {
 } from './schemas/endpoint';
 
 const client = new ApolloClient({
-  uri: `http://ec2-54-153-1-136.us-west-1.compute.amazonaws.com:4000`,
+  uri: `http://ec2-54-241-86-137.us-west-1.compute.amazonaws.com`,
   resolvers: {
     Query: {
       FETCH_ALL_USERS,
