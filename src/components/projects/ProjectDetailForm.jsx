@@ -12,29 +12,33 @@ const ProjectDetailForm = () => {
 
   return (
     <Row>
-      <Col style={{ padding: '20px' }} md={{ span: 8, offset: 2 }}>
-        <div className="d-flex justify-content-between align-items-center">
-          <h2>Project Detail</h2>
+      <Col
+        className="neumorph-card"
+        style={{ padding: '20px' }}
+        md={{ span: 8, offset: 2 }}
+      >
+        <div className="neumorph-card d-flex justify-content-between p-2 mb-5">
+          <h2 className="ml-3 my-auto">Project Detail</h2>
           <div className="d-flex align-items-center">
             {disable ? (
               <MdEdit
-                size="1.5em"
-                className="icon my-0"
+                size="2em"
+                className="neumorph-btn icon p-1 my-0 mr-3"
                 title="Edit Detail"
                 onClick={() => disableForm()}
               />
             ) : (
               <MdSave
-                size="1.5em"
-                className="icon my-0 mr-2"
+                size="2em"
+                className="neumorph-btn icon p-1 my-0 mr-5"
                 title="Save"
                 onClick={() => disableForm()}
               />
             )}
             {!disable ? (
               <MdClear
-                size="1.5em"
-                className="icon my-0"
+                size="2em"
+                className="neumorph-btn icon p-1 my-0 mr-2"
                 title="Cancel Edit"
                 onClick={() => disableForm()}
               />
@@ -43,7 +47,7 @@ const ProjectDetailForm = () => {
             )}
           </div>
         </div>
-        <hr className="mx-0 mt-1 mb-2" />
+
         <Form.Group>
           <Form.Row>
             <Form.Label column lg={3}>

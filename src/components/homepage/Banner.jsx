@@ -33,6 +33,7 @@ const Banner = () => {
             Online API documentation maker
           </h3>
           <Link
+            title="Create new project"
             to="/new-project"
             className="banner-btn mr-2 font-weight-bold"
             style={{ fontSize: '1.5em' }}

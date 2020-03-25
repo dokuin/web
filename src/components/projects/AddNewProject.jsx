@@ -40,6 +40,7 @@ export default function ProjectsDetailPage() {
             <div className="p-5 neumorph-card">
               <div>
                 <MdClear
+                  title="Back"
                   size="2em"
                   className="mr-3 icon rounded-circle bg-light p-2 neumorph-btn"
                   onClick={() => goBack()}
