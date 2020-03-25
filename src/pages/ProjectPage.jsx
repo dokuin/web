@@ -4,14 +4,12 @@ import { Link } from 'react-router-dom'
 
 import { Container, Row, Col } from 'react-bootstrap'
 import { Slide, Fade } from 'react-reveal'
-import { runEndpoint } from '../store/actions/project';
+import { runEndpoint } from '../store/actions/project'
 import EndpointTable from '../components/projects/EndpointTable'
 import AddEndpointModal from '../components/projects/AddEndpointModal'
 import ProjectDetailForm from '../components/projects/ProjectDetailForm'
 import Sidebar from '../components/projects/Sidebar'
 
-import { createStore } from 'redux'
-import reducer from '../store/reducers/index'
 export default function ProjectPage() {
   const projects = useSelector((state) => state.projectReducer.projects)
   const [selectedProjectIndex, setSelectedProjectIndex] = useState(0)
