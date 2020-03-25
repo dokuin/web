@@ -16,14 +16,14 @@ export default function ProjectsDetailPage() {
   const [projectBaseURL, setProjectBaseURL] = useState('')
   const [projectAuthor, setProjectAuthor] = useState('')
   const [projectDescription, setProjectDescription] = useState('')
-
   const submit = (e) => {
     e.preventDefault()
     const project = {
       name: projectName,
       baseUrl: projectBaseURL,
       author: projectAuthor,
-      description: projectDescription
+      description: projectDescription,
+      endpoints: []
     }
     dispatch(addNewProject(project))
     push('/projects')
