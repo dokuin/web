@@ -1,12 +1,37 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+
 import { Row, Col, Form } from 'react-bootstrap'
-// import { Button } from 'react-bootstrap'
 import { MdClear, MdEdit, MdSave } from 'react-icons/md'
 
-const ProjectDetailForm = () => {
-  const [disable, setDisable] = useState(true)
+import { updateProject } from '../../store/actions/project'
 
-  const disableForm = () => {
+const ProjectDetailForm = (props) => {
+  const { project, projectId } = props
+  const dispatch = useDispatch()
+
+  const [disable, setDisable] = useState(true)
+  const [projectName, setProjectName] = useState('')
+  const [projectBaseURL, setProjectBaseURL] = useState('')
+  const [projectAuthor, setProjectAuthor] = useState('')
+  const [projectDescription, setProjectDescription] = useState('')
+
+  const getEditReady = () => {
+    setProjectName(project.name)
+    setProjectBaseURL(project.baseUrl)
+    setProjectAuthor(project.author)
+    setProjectDescription(project.description)
+    setDisable(!disable)
+  }
+
+  const saveProject = () => {
+    const projectData = {
+      name: projectName,
+      baseUrl: projectBaseURL,
+      author: projectAuthor,
+      description: projectDescription
+    }
+    dispatch(updateProject(projectData, projectId))
     setDisable(!disable)
   }
 
@@ -25,14 +50,14 @@ const ProjectDetailForm = () => {
                 size="2em"
                 className="neumorph-btn icon p-1 my-0 mr-3"
                 title="Edit Detail"
-                onClick={() => disableForm()}
+                onClick={() => getEditReady()}
               />
             ) : (
               <MdSave
                 size="2em"
                 className="neumorph-btn icon p-1 my-0 mr-5"
                 title="Save"
-                onClick={() => disableForm()}
+                onClick={() => saveProject()}
               />
             )}
             {!disable ? (
@@ -40,7 +65,7 @@ const ProjectDetailForm = () => {
                 size="2em"
                 className="neumorph-btn icon p-1 my-0 mr-2"
                 title="Cancel Edit"
-                onClick={() => disableForm()}
+                onClick={() => setDisable(!disable)}
               />
             ) : (
               <p></p>
@@ -57,7 +82,8 @@ const ProjectDetailForm = () => {
               <Form.Control
                 type="text"
                 placeholder="Large text"
-                value="tokomedia"
+                value={disable ? project.name : projectName}
+                onChange={(e) => setProjectName(e.target.value)}
                 disabled={disable}
               />
             </Col>
@@ -73,7 +99,8 @@ const ProjectDetailForm = () => {
               <Form.Control
                 type="text"
                 placeholder="Large text"
-                value="https://localhost:3000"
+                value={disable ? project.baseUrl : projectBaseURL}
+                onChange={(e) => setProjectBaseURL(e.target.value)}
                 disabled={disable}
               />
             </Col>
@@ -89,7 +116,8 @@ const ProjectDetailForm = () => {
               <Form.Control
                 type="text"
                 placeholder="Large text"
-                value="Oasis"
+                value={disable ? project.author : projectAuthor}
+                onChange={(e) => setProjectAuthor(e.target.value)}
                 disabled={disable}
               />
             </Col>
@@ -106,7 +134,8 @@ const ProjectDetailForm = () => {
                 type="text"
                 as="textarea"
                 placeholder="Large text"
-                value="It is practice project for REST API"
+                value={disable ? project.description : projectDescription}
+                onChange={(e) => setProjectDescription(e.target.value)}
                 disabled={disable}
               />
             </Col>

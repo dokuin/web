@@ -1,7 +1,6 @@
 import React from 'react'
 import { Table } from 'react-bootstrap'
-import { FaTrash } from 'react-icons/fa'
-import { MdEdit } from 'react-icons/md'
+import { MdEdit, MdDelete } from 'react-icons/md'
 export default function EndpointTable() {
   return (
     <div className="neumorph-card p-3">
@@ -21,7 +20,9 @@ export default function EndpointTable() {
             <th>Description</th>
             <th>Query Params</th>
             <th>Request Body</th>
-            <th>Action</th>
+            <th align="center" className="text-center">
+              Action
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -32,19 +33,17 @@ export default function EndpointTable() {
             <td>Get All movies</td>
             <td>no</td>
             <td>no</td>
-            <td>
-              <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-                <MdEdit
-                  title="Delete endpoint"
-                  size="2em"
-                  className="neumorph-btn icon p-1"
-                />
-                <FaTrash
-                  title="Edit endpoint"
-                  size="2em"
-                  className="neumorph-btn icon p-1"
-                />
-              </div>
+            <td className="d-flex justify-content-center">
+              <MdEdit
+                title="Delete endpoint"
+                size="2em"
+                className="neumorph-btn icon p-1 mr-3"
+              />
+              <MdDelete
+                title="Edit endpoint"
+                size="2em"
+                className="neumorph-btn icon p-1 mr-3"
+              />
             </td>
           </tr>
           <tr>
@@ -54,19 +53,17 @@ export default function EndpointTable() {
             <td>Get All movies</td>
             <td>key = id, value = 129nas </td>
             <td>no</td>
-            <td>
-              <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-                <MdEdit
-                  title="Delete endpoint"
-                  size="2em"
-                  className="neumorph-btn icon p-1"
-                />
-                <FaTrash
-                  title="Edit endpoint"
-                  size="2em"
-                  className="neumorph-btn icon p-1"
-                />
-              </div>
+            <td className="d-flex justify-content-center">
+              <MdEdit
+                title="Delete endpoint"
+                size="2em"
+                className="neumorph-btn icon p-1 mr-3"
+              />
+              <MdDelete
+                title="Edit endpoint"
+                size="2em"
+                className="neumorph-btn icon p-1 mr-3"
+              />
             </td>
           </tr>
         </tbody>
