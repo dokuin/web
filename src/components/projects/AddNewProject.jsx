@@ -21,7 +21,7 @@ export default function ProjectsDetailPage() {
     e.preventDefault()
     const project = {
       name: projectName,
-      baseUrl: projectBaseURL,
+      baseURL: projectBaseURL,
       author: projectAuthor,
       description: projectDescription,
       endpoints: []

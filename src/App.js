@@ -15,7 +15,8 @@ import HomePage from './components/homepage/Banner'
 import ProjectPage from './pages/ProjectPage'
 import NewProjectsPage from './components/projects/AddNewProject'
 import LoginPage from './pages/LoginPage'
-import ProfilePage from './pages/ProfilePage'
+import Preview from './pages/Preview'
+
 
 const AuthenticationRoute = ({component: Component,...rest}) =>(
   <Route {...rest}
@@ -46,7 +47,8 @@ function App() {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/projects" component={ProjectPage} />
-          <AuthenticationRoute path="/profile" component={ProfilePage} />
+          <Route path="/preview/:id" component={Preview} />
+          {/* <AuthenticationRoute path="/profile" component={ProfilePage} /> */}
           <AuthenticationRoute path="/new-project" component={NewProjectsPage} />
         <Route path="/login" component={LoginPage} />
           <Route path="*">

@@ -67,13 +67,13 @@ export default function AddEndpointModal(props) {
   const toSaveEndpoint = () => {
     const { projectId } = props
     let endpoint = {
+      httpRequest: httpRequest,
       path: path,
       description: reqDescription,
-      query: useQuery ? JSON.stringify(query) : false,
-      reqBody: useBody ? JSON.stringify(reqBody) : false,
-      successResponse: JSON.stringify(successResponse),
-      errorResponse: JSON.stringify(errorResponse)
+      query: useQuery ? query : {},
+      body: useBody ? reqBody : {},
     }
+    
     dispatch(addEndpoint(endpoint, projectId))
     reset()
     props.handleClose()
@@ -84,10 +84,10 @@ export default function AddEndpointModal(props) {
     setReqDescription('Get all user data')
     setUseQuery(false)
     setUseBody(false)
-    setSuccessResponse('')
-    setErrorResponse('')
-    setQuery('')
-    setReqBody('')
+    // setSuccessResponse('')
+    // setErrorResponse('')
+    setQuery({})
+    setReqBody({})
   }
 
   return (

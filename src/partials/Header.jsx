@@ -52,7 +52,7 @@ const Header = () => {
             paddingBottom: '6px',
             paddingRight:'30px',
             paddingLeft:'60px',}}>
-            <Link to="/" className="router-link">
+            <Link to="/projects" className="router-link">
 
               <Nav.Link as="div" className="text-dark font-weight-bold">
                 Editor
