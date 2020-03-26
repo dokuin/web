@@ -1,9 +1,21 @@
 import React, { useState } from 'react'
 
-import { makeStyles, Drawer, Fab } from '@material-ui/core'
-import { Badge } from 'react-bootstrap'
+import {
+  makeStyles,
+  Drawer,
+  Fab,
+  ListItem,
+  List,
+  ListItemText,
+  Divider
+} from '@material-ui/core'
+import { MdDelete } from 'react-icons/md'
 
 import { MdMenu } from 'react-icons/md'
+import Confirm from '../Confirm'
+import { useDispatch } from 'react-redux'
+
+import { deleteProject as deleteProjectAction } from '../../store/actions/project'
 
 const useStyles = makeStyles({
   paper: {
@@ -15,13 +27,25 @@ const useStyles = makeStyles({
 const Sidebar = (props) => {
   const classes = useStyles()
   const { projects } = props
+  const dispatch = useDispatch()
 
   const [open, setOpen] = useState(false)
+  const [openDialog, setOpenDialog] = useState(false)
+  const [projectToDelete, setProjectToDelete] = useState()
+
+  const select = (id) => {
+    props.selectProject(id)
+  }
+
+  const deleteProject = () => {
+    dispatch(deleteProjectAction(projectToDelete))
+    setOpenDialog(false)
+  }
 
   return (
     <div style={{ position: 'sticky', top: 0 }}>
       <Fab
-        className="neumorph-btn icon m-3"
+        className="neumorph-btn icon mt-2 mx-3"
         style={{ backgroundColor: '#d5dbf6' }}
         onClick={() => setOpen(!open)}
       >
@@ -36,22 +60,53 @@ const Sidebar = (props) => {
       >
         <div className="m-2">
           <div className="neumorph-card p-1">
-            <h4 className="my-auto text-center">
-              Project list
-              {projects.length > 1 ? (
-                <Badge pill variant="primary">
-                  {projects.length}
-                </Badge>
-              ) : (
-                ''
-              )}
-            </h4>
+            <h4 className="my-auto text-center">Project list</h4>
           </div>
-          <ul>
+          <p className="my-2">
+            Total : {projects.length > 1 ? projects.length : 1}
+          </p>
+          <hr className="mt-0" />
+          <List component="nav">
             {projects.map((project, i) => {
-              return <li key={i}>{project.name}</li>
+              const index = i
+              return (
+                <>
+                  <ListItem
+                    key={index}
+                    className="d-flex justify-content-between mx-auto"
+                    button
+                  >
+                    <span className="w-100" onClick={() => select(index)}>
+                      <ListItemText primary={project.name} />
+                    </span>
+                    <span className="d-flex align-items-center my-auto">
+                      <MdDelete
+                        size="2em"
+                        className="neumorph-btn icon p-1"
+                        onClick={() => {
+                          console.log(index, 'icon')
+                          setProjectToDelete(index)
+                          setOpenDialog(true)
+                        }}
+                      />
+                      <Confirm
+                        confirm={openDialog}
+                        title={'Remove project?'}
+                        msg={
+                          'You are about to delete your project from project list. Do you agree?'
+                        }
+                        ok={() => {
+                          deleteProject()
+                        }}
+                        cancel={() => setOpenDialog(false)}
+                      />
+                    </span>
+                  </ListItem>
+                  <Divider />
+                </>
+              )
             })}
-          </ul>
+          </List>
         </div>
       </Drawer>
     </div>

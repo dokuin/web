@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { Modal, Form, Row, Col } from 'react-bootstrap'
 import {
@@ -14,7 +14,7 @@ import {
 import AddQueryParams from './addEndpointModal/AddQueryParams'
 import AddReqBody from './addEndpointModal/AddReqBody'
 
-import { addEndpoint } from '../../store/actions/project'
+import { addEndpoint, editEndpoint } from '../../store/actions/project'
 
 const BootstrapInput = withStyles((theme) => ({
   root: {
@@ -53,6 +53,9 @@ const BootstrapInput = withStyles((theme) => ({
 
 export default function AddEndpointModal(props) {
   const dispatch = useDispatch()
+  const project = useSelector(
+    (state) => state.projectReducer.projects[props.projectId]
+  )
 
   const [httpRequest, setHttpRequest] = useState('GET')
   const [path, setPath] = useState('/')
@@ -64,8 +67,23 @@ export default function AddEndpointModal(props) {
   const [query, setQuery] = useState('')
   const [reqBody, setReqBody] = useState('')
 
+  useEffect(() => {
+    if (props.isEdit) {
+      const endpoint = [...project.endpoints][props.endpointToEdit]
+      setHttpRequest(endpoint.httpRequest)
+      setPath(endpoint.path)
+      setReqDescription(endpoint.description)
+      setUseQuery(!endpoint.query ? false : true)
+      setUseBody(!endpoint.reqBody ? false : true)
+      setSuccessResponse(endpoint.successResponse)
+      setErrorResponse(endpoint.errorResponse)
+      setQuery(!endpoint.query ? '' : endpoint.query)
+      setReqBody(!endpoint.reqBody ? '' : endpoint.reqBody)
+    }
+  }, [props, project])
+
   const toSaveEndpoint = () => {
-    const { projectId } = props
+    const { projectId, endpointToEdit } = props
     let endpoint = {
       httpRequest: httpRequest,
       path: path,
@@ -73,8 +91,12 @@ export default function AddEndpointModal(props) {
       query: useQuery ? query : {},
       body: useBody ? reqBody : {},
     }
-    
-    dispatch(addEndpoint(endpoint, projectId))
+
+    if (!props.isEdit) {
+      dispatch(addEndpoint(endpoint, projectId))
+    } else {
+      dispatch(editEndpoint(endpoint, endpointToEdit, projectId))
+    }
     reset()
     props.handleClose()
   }

@@ -16,7 +16,6 @@ export default function ProjectsDetailPage() {
   const [projectBaseURL, setProjectBaseURL] = useState('')
   const [projectAuthor, setProjectAuthor] = useState('')
   const [projectDescription, setProjectDescription] = useState('')
-
   const submit = (e) => {
     e.preventDefault()
     const project = {
@@ -68,7 +67,6 @@ export default function ProjectsDetailPage() {
                   <Form.Control
                     type="text"
                     placeholder="sunday-store.herokuapp.com"
-                    required
                     value={projectBaseURL}
                     onChange={(e) => {
                       setProjectBaseURL(e.target.value)
@@ -80,7 +78,6 @@ export default function ProjectsDetailPage() {
                   <Form.Control
                     type="text"
                     placeholder="Oasis"
-                    required
                     value={projectAuthor}
                     onChange={(e) => {
                       setProjectAuthor(e.target.value)

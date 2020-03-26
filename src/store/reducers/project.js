@@ -14,10 +14,10 @@ function project(state = initialState, action) {
       }
 
     case 'UPDATE_PROJECT':
-      const { projectData, projectId } = action.payload
-      let projectList = [...state.projects]
-      projectList[projectId] = projectData
-      return { ...state, projects: projectList }
+      return { ...state, projects: action.payload.projectList }
+
+    case 'DELETE_PROJECT':
+      return { ...state, projects: action.payload.projectList }
 
     case 'ADD_ENDPOINT':
       return { ...state, projects: action.payload.projectList }
@@ -27,6 +27,13 @@ function project(state = initialState, action) {
 
     case 'TEMP_ENDPOINT': 
       return {...state, TempEP: action.payload}
+
+    case 'UPDATE_ENDPOINT':
+      return { ...state, projects: action.payload.projectList }
+
+    case 'DELETE_ENDPOINT':
+      return { ...state, projects: action.payload.projectList }
+
     default:
       return state
   }

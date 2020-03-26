@@ -5,24 +5,40 @@ import { runEndpoint } from "../store/actions/project";
 import { Container, Row, Col } from "react-bootstrap";
 import { Slide, Fade } from "react-reveal";
 
-import EndpointTable from "../components/projects/EndpointTable";
-import AddEndpointModal from "../components/projects/AddEndpointModal";
-import ProjectDetailForm from "../components/projects/ProjectDetailForm";
-import Sidebar from "../components/projects/Sidebar";
+import { Container, Row, Col } from 'react-bootstrap'
+import { Slide, Fade } from 'react-reveal'
+
+import EndpointTable from '../components/projects/EndpointTable'
+import AddEndpointModal from '../components/projects/AddEndpointModal'
+import ProjectDetailForm from '../components/projects/ProjectDetailForm'
+import Sidebar from '../components/projects/Sidebar'
+
 import project from "../store/reducers/project";
+// import { runEndpoint } from '../store/actions/project'
 
 export default function ProjectPage() {
-  const dispatch = useDispatch();
-  const projects = useSelector(state => state.projectReducer.projects);
-  const [selectedProjectIndex, setSelectedProjectIndex] = useState(0);
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+    const dispatch = useDispatch();
+  const projects = useSelector((state) => state.projectReducer.projects)
+  const [selectedProjectIndex, setSelectedProjectIndex] = useState(0)
+  const [isEdit, setIsEdit] = useState(false)
+  const [endpointToEdit, setEndpointToEdit] = useState(0)
+
+  // ini dari erin
   const Loading = useSelector(state => state.projectReducer.loading )
   console.log(Loading,'dari projecy')
   const generate = () => {
     dispatch(runEndpoint(projects[0]));
   };
+
+  const [show, setShow] = useState(false)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
+
+  const showEditModal = (endpointId) => {
+    setEndpointToEdit(endpointId)
+    setIsEdit(true)
+    handleShow()
+  }
 
   return (
     <>
@@ -74,32 +90,31 @@ export default function ProjectPage() {
                   </div>
                   <Row>
                     <Col md={{ span: 10, offset: 1 }}>
-                      <div className="d-flex justify-content-around mb-4">
-                        <button
-                          className="neumorph-btn px-3 py-2"
-                          onClick={handleShow}
-                        >
-                          Add Endpoint
-                        </button>
-                        <Link to={`/preview/${selectedProjectIndex}`}>
-                          <button
-                            className="neumorph-btn px-3 py-2"
-                            onClick={generate}
-                          >
-                            Create Markdown
-                          </button>
-                        </Link>
-                      </div>
                       <AddEndpointModal
                         projectId={selectedProjectIndex}
                         show={show}
                         handleClose={handleClose}
                         handleShow={handleShow}
+                        isEdit={isEdit}
+                        endpointToEdit={endpointToEdit}
                       />
-                      {
-                        projects[selectedProjectIndex].endpoints.length !==0 &&
-                        <EndpointTable project={projects[selectedProjectIndex]} />
-                      }
+                      <EndpointTable
+                        endpoints={projects[selectedProjectIndex].endpoints}
+                        projectId={selectedProjectIndex}
+                        addEndpoint={() => handleShow()}
+                        showEditModal={(endpointId) =>
+                          showEditModal(endpointId)
+                        }
+                      />
+                      <div className="d-flex justify-content-around my-4">
+                        <button
+                          className="neumorph-btn px-3 py-2"
+                          style={{ fontSize: '1.5em' }}
+                          onClick={handleShow}
+                        >
+                          Create Markdown
+                        </button>
+                      </div>
                     </Col>
                   </Row>
                 </Fade>
