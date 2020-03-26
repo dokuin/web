@@ -1,19 +1,6 @@
 import { RunEndpoints, ConvertMd } from 'dokuinjs'
 
-import Axios from 'axios'
-
-const axios = Axios.create({
-  baseURL: 'https://localhost:4000'
-})
-
-export const getProjectList = async () => {
-  try {
-    const { data } = axios.get('/projects')
-    console.log(data)
-  } catch (err) {
-    console.log(err)
-  }
-}
+export const getProjectList = () => {}
 
 export const addNewProject = (project) => {
   return {
@@ -86,8 +73,6 @@ export const editEndpoint = (endpoint, endpointId, projectId) => {
 }
 
 export const deleteEndpoint = (endpointId, projectId) => {
-  console.log(endpointId)
-  console.log(projectId)
   return (dispatch, getState) => {
     let projectList = [...getState().projectReducer.projects]
     projectList[projectId].endpoints.splice(endpointId, 1)

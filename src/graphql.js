@@ -16,24 +16,17 @@ import {
   CREATE_PROJECT,
   UPDATE_PROJECT,
   DELETE_PROJECT
-<<<<<<< HEAD
-} from './schemas/project';
+} from './schemas/project'
 import {
   FETCH_ALL_ENDPOINTS,
   FIND_ONE_ENDPOINT,
   CREATE_ENDPOINT,
   UPDATE_ENDPOINT,
   DELETE_ENDPOINT
-} from './schemas/endpoint';
-
-const client = new ApolloClient({
-  uri: `http://ec2-54-241-86-137.us-west-1.compute.amazonaws.com`,
-=======
-} from './schemas/project'
+} from './schemas/endpoint'
 
 const client = new ApolloClient({
   uri: `http://ec2-54-241-86-137.us-west-1.compute.amazonaws.com:4000`,
->>>>>>> pull dev
   resolvers: {
     Query: {
       FETCH_ALL_USERS,

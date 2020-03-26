@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { useMutation } from '@apollo/react-hooks'
+import { Link, useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import { useMutation } from '@apollo/react-hooks'
 
 import { makeStyles, withStyles } from '@material-ui/core/styles'
 import { Image } from 'react-bootstrap'
@@ -12,6 +12,7 @@ import { IoMdArrowBack } from 'react-icons/io'
 
 import LoginBg from '../assets/LoginBg.png'
 import { SIGN_IN, SIGN_UP } from '../schemas/user'
+import { setLoginState } from '../store/actions/user'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,8 +39,10 @@ const ColorButton = withStyles((theme) => ({
 }))(Button)
 
 export default function() {
+  const dispatch = useDispatch()
+
   const classes = useStyles()
-  const dispatch = useDispatch
+  const { push } = useHistory()
   const [onRegister, setOnRegister] = useState(false)
   const [fullname, setFullname] = useState('')
   const [username, setUsername] = useState('')
@@ -70,6 +73,14 @@ export default function() {
       console.log(response)
     } catch (err) {
       console.log(err)
+      dispatch(setLoginState())
+      let token = Math.random()
+      localStorage.setItem('token', token)
+      toHome()
+    }
+
+    function toHome() {
+      push('/new-project')
     }
   }
 
@@ -166,7 +177,6 @@ export default function() {
               {onRegister && (
                 <>
                   <TextFld
-                    id="standard-secondary"
                     fullWidth
                     label="Full Name"
                     color="secondary"
@@ -175,7 +185,6 @@ export default function() {
                   />
 
                   <TextFld
-                    id="standard-secondary"
                     fullWidth
                     label="Username"
                     color="secondary"
@@ -184,7 +193,6 @@ export default function() {
                   />
 
                   <TextFld
-                    id="standard-secondary"
                     fullWidth
                     label="Picture url"
                     color="secondary"
@@ -194,7 +202,6 @@ export default function() {
                 </>
               )}
               <TextFld
-                id="standard-secondary"
                 fullWidth
                 label="Email"
                 color="secondary"
@@ -202,7 +209,6 @@ export default function() {
                 onChange={(e) => setEmail(e.target.value)}
               />
               <TextFld
-                id="standard-secondary"
                 fullWidth
                 label="Password"
                 color="secondary"
