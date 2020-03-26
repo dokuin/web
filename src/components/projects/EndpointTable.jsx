@@ -12,9 +12,10 @@ export default function EndpointTable(props) {
   const dispatch = useDispatch()
 
   const [showConfirm, setShowConfirm] = useState()
+  const [endpointToDelete, setEndpointToDelete] = useState()
 
-  const removeEndpoint = (endpointId) => {
-    dispatch(deleteEndpoint(endpointId, projectId))
+  const removeEndpoint = () => {
+    dispatch(deleteEndpoint(endpointToDelete, projectId))
     setShowConfirm(false)
   }
 
@@ -83,7 +84,10 @@ export default function EndpointTable(props) {
                           title="Delete endpoint"
                           size="2em"
                           className="neumorph-btn icon p-1 ml-2"
-                          onClick={() => setShowConfirm(true)}
+                          onClick={() => {
+                            setEndpointToDelete(i)
+                            setShowConfirm(true)
+                          }}
                         />
                         <Confirm
                           confirm={showConfirm}
@@ -91,7 +95,7 @@ export default function EndpointTable(props) {
                           msg={
                             'The endpoint will be remove from project endpoint list. Do you agree?'
                           }
-                          ok={() => removeEndpoint(i)}
+                          ok={() => removeEndpoint()}
                           cancel={() => setShowConfirm(false)}
                         />
                       </td>

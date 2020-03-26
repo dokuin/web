@@ -52,7 +52,6 @@ const BootstrapInput = withStyles((theme) => ({
 }))(InputBase)
 
 export default function AddEndpointModal(props) {
-  console.log(props)
   const dispatch = useDispatch()
   const project = useSelector(
     (state) => state.projectReducer.projects[props.projectId]

@@ -1,4 +1,4 @@
-import { gql } from 'apollo-boost';
+import { gql } from 'apollo-boost'
 
 export const FETCH_ALL_USERS = gql`
   query {
@@ -10,7 +10,7 @@ export const FETCH_ALL_USERS = gql`
       email
     }
   }
-`;
+`
 
 export const FIND_ONE_USER = gql`
   query FindOneUser($userId: ID!) {
@@ -22,7 +22,7 @@ export const FIND_ONE_USER = gql`
       email
     }
   }
-`;
+`
 
 export const SIGN_UP = gql`
   mutation SignUp(
@@ -46,17 +46,11 @@ export const SIGN_UP = gql`
       email
     }
   }
-`;
+`
 
 export const SIGN_IN = gql`
-  mutation SignIn(
-    $userIdentifier: String!
-    $password: String!
-  ) {
-    signIn(
-      userIdentifier: $userIdentifier
-      password: $password
-    ) {
+  mutation SignIn($userIdentifier: String!, $password: String!) {
+    signIn(userIdentifier: $userIdentifier, password: $password) {
       userId
       fullName
       username
@@ -64,7 +58,7 @@ export const SIGN_IN = gql`
       email
     }
   }
-`;
+`
 
 export const UPDATE_USER = gql`
   mutation UpdateUser(
@@ -92,17 +86,11 @@ export const UPDATE_USER = gql`
       email
     }
   }
-`;
+`
 
 export const DELETE_USER = gql`
-  mutation DeleteUser(
-    $userId: ID!
-    $token: String!
-  ) {
-    deleteUser(
-      userId: $userId
-      token: $token
-    ) {
+  mutation DeleteUser($userId: ID!, $token: String!) {
+    deleteUser(userId: $userId, token: $token) {
       userId
       fullName
       username
@@ -110,4 +98,4 @@ export const DELETE_USER = gql`
       email
     }
   }
-`;
+`

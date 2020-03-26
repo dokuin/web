@@ -66,7 +66,6 @@ export default function ProjectPage() {
               <Sidebar
                 projects={projects}
                 selectProject={(id) => {
-                  console.log(id)
                   setSelectedProjectIndex(id)
                 }}
               />
