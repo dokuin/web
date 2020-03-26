@@ -66,7 +66,7 @@ export default function() {
     try {
       const response = await signIn({
         variables: {
-          email: email,
+          userIdentifier: email,
           password: password
         }
       })
