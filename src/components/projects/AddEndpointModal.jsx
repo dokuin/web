@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
 import { Modal, Form, Row, Col } from 'react-bootstrap'
 import {
   Select,
@@ -8,6 +10,11 @@ import {
   Switch,
   FormControlLabel
 } from '@material-ui/core'
+
+import AddQueryParams from './addEndpointModal/AddQueryParams'
+import AddReqBody from './addEndpointModal/AddReqBody'
+
+import { addEndpoint, editEndpoint } from '../../store/actions/project'
 
 const BootstrapInput = withStyles((theme) => ({
   root: {
@@ -45,6 +52,12 @@ const BootstrapInput = withStyles((theme) => ({
 }))(InputBase)
 
 export default function AddEndpointModal(props) {
+  console.log(props)
+  const dispatch = useDispatch()
+  const project = useSelector(
+    (state) => state.projectReducer.projects[props.projectId]
+  )
+
   const [httpRequest, setHttpRequest] = useState('GET')
   const [path, setPath] = useState('/')
   const [reqDescription, setReqDescription] = useState('Get all user data')
@@ -52,6 +65,54 @@ export default function AddEndpointModal(props) {
   const [useBody, setUseBody] = useState(false)
   const [successResponse, setSuccessResponse] = useState('')
   const [errorResponse, setErrorResponse] = useState('')
+  const [query, setQuery] = useState('')
+  const [reqBody, setReqBody] = useState('')
+
+  useEffect(() => {
+    if (props.isEdit) {
+      const endpoint = [...project.endpoints][props.endpointToEdit]
+      setHttpRequest(endpoint.httpRequest)
+      setPath(endpoint.path)
+      setReqDescription(endpoint.description)
+      setUseQuery(!endpoint.query ? false : true)
+      setUseBody(!endpoint.reqBody ? false : true)
+      setSuccessResponse(endpoint.successResponse)
+      setErrorResponse(endpoint.errorResponse)
+      setQuery(!endpoint.query ? '' : endpoint.query)
+      setReqBody(!endpoint.reqBody ? '' : endpoint.reqBody)
+    }
+  }, [props, project])
+
+  const toSaveEndpoint = () => {
+    const { projectId, endpointToEdit } = props
+    let endpoint = {
+      httpRequest: httpRequest,
+      path: path,
+      description: reqDescription,
+      query: useQuery ? JSON.stringify(query) : false,
+      reqBody: useBody ? JSON.stringify(reqBody) : false,
+      successResponse: JSON.stringify(successResponse),
+      errorResponse: JSON.stringify(errorResponse)
+    }
+    if (!props.isEdit) {
+      dispatch(addEndpoint(endpoint, projectId))
+    } else {
+      dispatch(editEndpoint(endpoint, endpointToEdit, projectId))
+    }
+    reset()
+    props.handleClose()
+  }
+
+  const reset = () => {
+    setPath('/')
+    setReqDescription('Get all user data')
+    setUseQuery(false)
+    setUseBody(false)
+    setSuccessResponse('')
+    setErrorResponse('')
+    setQuery('')
+    setReqBody('')
+  }
 
   return (
     <>
@@ -172,73 +233,11 @@ export default function AddEndpointModal(props) {
               </div>
 
               {/* ini buat query params */}
-              {useQuery && (
-                <div className="neumorph-card bg-light p-1 py-2 my-3">
-                  <div className="neumorph-card bg-light d-flex justify-content-center p-1 py-2 m-3">
-                    <h4 className="my-auto ml-2">Query Param</h4>
-                  </div>
-                  <div className="px-3">
-                    <Row>
-                      <Col sm={12} md={6}>
-                        <Form.Group>
-                          <Form.Label>Key :</Form.Label>
-                          <Form.Control
-                            type="text"
-                            placeholder="/users"
-                            value={path}
-                            onChange={(e) => setPath(e.target.value)}
-                          />
-                        </Form.Group>
-                      </Col>
-                      <Col sm={12} md={6}>
-                        <Form.Group>
-                          <Form.Label>Value :</Form.Label>
-                          <Form.Control
-                            type="text"
-                            as="textarea"
-                            value={successResponse}
-                            onChange={(e) => setSuccessResponse(e.target.value)}
-                          />
-                        </Form.Group>
-                      </Col>
-                    </Row>
-                  </div>
-                </div>
-              )}
+              {useQuery && <AddQueryParams query={query} setQuery={setQuery} />}
 
               {/* ini buat Request body */}
               {useBody && (
-                <div className="neumorph-card bg-light p-1 py-2 my-3">
-                  <div className="neumorph-card bg-light d-flex justify-content-center p-1 py-2 m-3">
-                    <h4 className="my-auto ml-2">Request Body</h4>
-                  </div>
-                  <div className="px-3">
-                    <Row>
-                      <Col sm={12} md={6}>
-                        <Form.Group>
-                          <Form.Label>Key :</Form.Label>
-                          <Form.Control
-                            type="text"
-                            placeholder="/users"
-                            value={path}
-                            onChange={(e) => setPath(e.target.value)}
-                          />
-                        </Form.Group>
-                      </Col>
-                      <Col sm={12} md={6}>
-                        <Form.Group>
-                          <Form.Label>Value :</Form.Label>
-                          <Form.Control
-                            type="text"
-                            as="textarea"
-                            value={successResponse}
-                            onChange={(e) => setSuccessResponse(e.target.value)}
-                          />
-                        </Form.Group>
-                      </Col>
-                    </Row>
-                  </div>
-                </div>
+                <AddReqBody reqBody={reqBody} setReqBody={setReqBody} />
               )}
             </Col>
           </Row>
@@ -247,12 +246,15 @@ export default function AddEndpointModal(props) {
         <Modal.Footer className="d-flex justify-content-center">
           <button
             className="neumorph-btn py-1 px-3"
+            onClick={() => toSaveEndpoint()}
+          >
+            Submit
+          </button>
+          <button
+            className="neumorph-btn py-1 px-3"
             onClick={props.handleClose}
           >
             Close
-          </button>
-          <button className="neumorph-btn py-1 px-3" type="submit">
-            Submit
           </button>
         </Modal.Footer>
       </Modal>

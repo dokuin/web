@@ -1,33 +1,14 @@
 const initialState = {
-  projects: [
-    {
-      name: "tokemedia",
-      description: "practice project",
-      baseURL: "https://sunday-store.herokuapp.com/api",
-      author: "oasis",
-      endpoints: [{
-        method: "get",
-        path: "products",
-        description: "get all product",
-      }]
-    }]
+  projects: []
 }
 
 function project(state = initialState, action) {
   switch (action.type) {
     case 'ADD_NEW_PROJECT':
+      console.log(action.payload.project)
       return {
         ...state,
         projects: [...state.projects, action.payload.project]
-      }
-    case 'ADD_MD_TO_PROJECT':
-      const copyProjects = [...state.projects]
-      const cloneProject = copyProjects.find(el => el.name === action.payload.responses.name)
-      cloneProject.mdFile = action.responses
-      return {
-        ...state,
-        ...state.projects.md = action.payload.responses,
-        projects: [...state.projects]
       }
 
     case 'UPDATE_PROJECT':
@@ -35,6 +16,18 @@ function project(state = initialState, action) {
       let projectList = [...state.projects]
       projectList[projectId] = projectData
       return { ...state, projects: projectList }
+
+    case 'DELETE_PROJECT':
+      return { ...state, projects: action.payload.projectList }
+
+    case 'ADD_ENDPOINT':
+      return { ...state, projects: action.payload.projectList }
+
+    case 'UPDATE_ENDPOINT':
+      return { ...state, projects: action.payload.projectList }
+
+    case 'DELETE_ENDPOINT':
+      return { ...state, projects: action.payload.projectList }
 
     default:
       return state

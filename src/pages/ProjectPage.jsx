@@ -4,20 +4,31 @@ import { Link } from 'react-router-dom'
 
 import { Container, Row, Col } from 'react-bootstrap'
 import { Slide, Fade } from 'react-reveal'
-import { runEndpoint } from '../store/actions/project'
+
 import EndpointTable from '../components/projects/EndpointTable'
 import AddEndpointModal from '../components/projects/AddEndpointModal'
 import ProjectDetailForm from '../components/projects/ProjectDetailForm'
 import Sidebar from '../components/projects/Sidebar'
 
+// import { runEndpoint } from '../store/actions/project'
+
 export default function ProjectPage() {
   const projects = useSelector((state) => state.projectReducer.projects)
   const [selectedProjectIndex, setSelectedProjectIndex] = useState(0)
-  runEndpoint(projects[0])
+  const [isEdit, setIsEdit] = useState(false)
+  const [endpointToEdit, setEndpointToEdit] = useState(0)
+  // runEndpoint(projects[0])
 
   const [show, setShow] = useState(false)
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
+
+  const showEditModal = (endpointId) => {
+    setEndpointToEdit(endpointId)
+    setIsEdit(true)
+    handleShow()
+  }
+
   return (
     <>
       <Slide duration={500} bottom>
@@ -54,11 +65,12 @@ export default function ProjectPage() {
             <>
               <Sidebar
                 projects={projects}
-                selectProject={(project) => {
-                  setSelectedProjectIndex(project)
+                selectProject={(id) => {
+                  console.log(id)
+                  setSelectedProjectIndex(id)
                 }}
               />
-              <Container style={{ minHeight: '90vh' }} fluid>
+              <Container className="mb-5" style={{ minHeight: '90vh' }} fluid>
                 <Fade>
                   <div className="my-5">
                     <ProjectDetailForm
@@ -68,26 +80,31 @@ export default function ProjectPage() {
                   </div>
                   <Row>
                     <Col md={{ span: 10, offset: 1 }}>
-                      <div className="d-flex justify-content-around mb-4">
+                      <AddEndpointModal
+                        projectId={selectedProjectIndex}
+                        show={show}
+                        handleClose={handleClose}
+                        handleShow={handleShow}
+                        isEdit={isEdit}
+                        endpointToEdit={endpointToEdit}
+                      />
+                      <EndpointTable
+                        endpoints={projects[selectedProjectIndex].endpoints}
+                        projectId={selectedProjectIndex}
+                        addEndpoint={() => handleShow()}
+                        showEditModal={(endpointId) =>
+                          showEditModal(endpointId)
+                        }
+                      />
+                      <div className="d-flex justify-content-around my-4">
                         <button
                           className="neumorph-btn px-3 py-2"
-                          onClick={handleShow}
-                        >
-                          Add Endpoint
-                        </button>
-                        <button
-                          className="neumorph-btn px-3 py-2"
+                          style={{ fontSize: '1.5em' }}
                           onClick={handleShow}
                         >
                           Create Markdown
                         </button>
                       </div>
-                      <AddEndpointModal
-                        show={show}
-                        handleClose={handleClose}
-                        handleShow={handleShow}
-                      />
-                      <EndpointTable />
                     </Col>
                   </Row>
                 </Fade>
