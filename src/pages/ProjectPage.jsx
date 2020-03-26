@@ -1,10 +1,7 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { runEndpoint } from "../store/actions/project";
-import { Container, Row, Col } from "react-bootstrap";
-import { Slide, Fade } from "react-reveal";
-
+import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
+import { runEndpoint } from '../store/actions/project'
 import { Container, Row, Col } from 'react-bootstrap'
 import { Slide, Fade } from 'react-reveal'
 
@@ -13,22 +10,22 @@ import AddEndpointModal from '../components/projects/AddEndpointModal'
 import ProjectDetailForm from '../components/projects/ProjectDetailForm'
 import Sidebar from '../components/projects/Sidebar'
 
-import project from "../store/reducers/project";
+import project from '../store/reducers/project'
 // import { runEndpoint } from '../store/actions/project'
 
 export default function ProjectPage() {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const projects = useSelector((state) => state.projectReducer.projects)
   const [selectedProjectIndex, setSelectedProjectIndex] = useState(0)
   const [isEdit, setIsEdit] = useState(false)
   const [endpointToEdit, setEndpointToEdit] = useState(0)
 
   // ini dari erin
-  const Loading = useSelector(state => state.projectReducer.loading )
-  console.log(Loading,'dari projecy')
+  const Loading = useSelector((state) => state.projectReducer.loading)
+  console.log(Loading, 'dari projecy')
   const generate = () => {
-    dispatch(runEndpoint(projects[0]));
-  };
+    dispatch(runEndpoint(projects[0]))
+  }
 
   const [show, setShow] = useState(false)
   const handleClose = () => setShow(false)
@@ -50,10 +47,10 @@ export default function ProjectPage() {
           return (
             <div
               className="d-flex align-items-center justify-content-center"
-              style={{ minHeight: "90vh" }}
+              style={{ minHeight: '90vh' }}
             >
               <Fade>
-                <Col sm={{ span: 8, offset: 2 }} style={{ width: "100vw" }}>
+                <Col sm={{ span: 8, offset: 2 }} style={{ width: '100vw' }}>
                   <div className="neumorph-card p-5">
                     <h2 className="text-center mb-5">
                       You currently have no project
@@ -62,7 +59,7 @@ export default function ProjectPage() {
                       title="Create new project"
                       to="/new-project"
                       className="d-flex justify-content-center banner-btn font-weight-bold"
-                      style={{ fontSize: "1.5em" }}
+                      style={{ fontSize: '1.5em' }}
                     >
                       Start New Project
                     </Link>
@@ -70,17 +67,17 @@ export default function ProjectPage() {
                 </Col>
               </Fade>
             </div>
-          );
+          )
         } else {
           return (
             <>
               <Sidebar
                 projects={projects}
-                selectProject={project => {
-                  setSelectedProjectIndex(project);
+                selectProject={(project) => {
+                  setSelectedProjectIndex(project)
                 }}
               />
-              <Container className="mb-5" style={{ minHeight: "90vh" }} fluid>
+              <Container className="mb-5" style={{ minHeight: '90vh' }} fluid>
                 <Fade>
                   <div className="my-5">
                     <ProjectDetailForm
@@ -120,9 +117,9 @@ export default function ProjectPage() {
                 </Fade>
               </Container>
             </>
-          );
+          )
         }
       })()}
     </>
-  );
+  )
 }
