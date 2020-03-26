@@ -1,11 +1,12 @@
 import React from 'react'
 import { Provider as StoreProvider } from 'react-redux'
 import {
-  BrowserRouter as Router,
+  Router,
   Route,
   Switch,
   Redirect
 } from 'react-router-dom'
+import { createBrowserHistory } from 'history'
 import store from './store'
 
 import Header from './partials/Header'
@@ -14,7 +15,8 @@ import HomePage from './components/homepage/Banner'
 import ProjectPage from './pages/ProjectPage'
 import NewProjectsPage from './components/projects/AddNewProject'
 import LoginPage from './pages/LoginPage'
-import ProfilePage from './pages/ProfilePage'
+import Preview from './pages/Preview'
+
 
 const AuthenticationRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -33,15 +35,19 @@ const AuthenticationRoute = ({ component: Component, ...rest }) => (
   />
 )
 
+
+const history = createBrowserHistory()
+
 function App() {
   return (
     <StoreProvider store={store}>
-      <Router>
+      <Router history={history}>
         <Header />
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route path="/projects" component={ProjectPage} />
-          <AuthenticationRoute path="/profile" component={ProfilePage} />
+          <Route path="/preview/:id" component={Preview} />
+          {/* <AuthenticationRoute path="/profile" component={ProfilePage} /> */}
           <AuthenticationRoute
             path="/new-project"
             component={NewProjectsPage}

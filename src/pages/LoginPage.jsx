@@ -49,6 +49,7 @@ export default function() {
   const [profilePic, setProfilePic] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const history = useHistory()
 
   const [signIn] = useMutation(SIGN_IN)
   const [signUp] = useMutation(SIGN_UP)
@@ -101,6 +102,10 @@ export default function() {
     }
   }
 
+  const handleSubmit = () => {
+    localStorage.setItem('token','jsdjsdjsjd')
+  }
+
   return (
     <div
       style={{
@@ -134,22 +139,7 @@ export default function() {
           }}
           className="d-flex flex-column align-items-center justify-content-center"
         >
-          <Link to="/">
-            <Button
-              variant="outlined"
-              color="primary"
-              className={classes.button}
-              style={{
-                position: 'absolute',
-                top: '0',
-                left: '0',
-                marginTop: '-10vh'
-              }}
-            >
-              <IoMdArrowBack className="mr-2" />
-              BACK
-            </Button>
-          </Link>
+     
           <h1
             style={{
               width: '100%',
@@ -221,6 +211,7 @@ export default function() {
                 color="primary"
                 type="submit"
                 className={classes.margin}
+                onSubmit={()=> handleSubmit()}
               >
                 {onRegister ? 'Register' : 'Login'}
               </ColorButton>
@@ -255,6 +246,18 @@ export default function() {
                 </h6>
               )}
             </div>
+                 <Link to="/">
+            <Button
+              variant="outlined"
+              color="primary"
+              style={{
+                marginTop: '10vh'
+              }}
+            >
+              <IoMdArrowBack className="mr-2" />
+              BACK
+            </Button>
+          </Link>
           </div>
         </div>
       </Fade>

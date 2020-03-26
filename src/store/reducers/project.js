@@ -1,8 +1,11 @@
 const initialState = {
-  projects: []
+  projects: [],
+  TempEP: [],
+  loading: true
 }
 
 function project(state = initialState, action) {
+  console.log(action.payload, 'dari reducer')
   switch (action.type) {
     case 'ADD_NEW_PROJECT':
       return {
@@ -18,6 +21,12 @@ function project(state = initialState, action) {
 
     case 'ADD_ENDPOINT':
       return { ...state, projects: action.payload.projectList }
+      
+    case 'SET_LOADING':
+      return {...state, loading: action.payload.bool}
+
+    case 'TEMP_ENDPOINT': 
+      return {...state, TempEP: action.payload}
 
     case 'UPDATE_ENDPOINT':
       return { ...state, projects: action.payload.projectList }

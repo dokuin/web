@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Navbar, Nav, Container, Image, Button } from 'react-bootstrap'
-import { Link, useLocation } from 'react-router-dom'
-
+import { Link, useLocation, useHistory } from 'react-router-dom'
 import DokuinLogo from '../assets/dokuin-logo.png'
 
 import styled from 'styled-components'
@@ -20,9 +19,9 @@ const HoverText = styled.p`
 
 const Header = () => {
   const dispatch = useDispatch()
+  const history = useHistory()
   const { pathname } = useLocation()
   const isLogin = useSelector((state) => state.useReducer)
-
   const [login, setLogin] = useState(false)
 
   useEffect(() => {

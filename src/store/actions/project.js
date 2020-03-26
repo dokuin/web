@@ -43,6 +43,16 @@ export const deleteProject = (projectId) => {
   }
 }
 
+export const deleteEndpoint = (desc)=>{
+  return{
+    type: 'DELETE_EP',
+    payload:{
+      desc
+    }
+  }
+}
+
+
 export const addEndpoint = (endpoint, projectId) => {
   return (dispatch, getState) => {
     let projectList = getState().projectReducer.projects
@@ -94,10 +104,31 @@ export const addMdProject = (response) => {
   }
 }
 
-export const runEndpoint = (project) => {
-  RunEndpoints(project)
+export const setLoading = (bool) =>{
+  return{
+    type: 'SET_LOADING',
+    payload: {
+      bool
+    }
+  }
+}
+
+export const tempRunEndPoint = (response) => ({
+  type: 'TEMP_ENDPOINT',
+  payload: response
+})
+
+export const runEndpoint = (project) => {  
+  return dispatch =>{
+    dispatch(setLoading(true))
+    RunEndpoints(project)
     .then((response) => {
-      return ConvertMd(response)
-    })
-    .catch((error) => {})
+       dispatch(tempRunEndPoint(response))
+       dispatch(setLoading(false))
+      })
+      .catch((error) => {
+        console.log(error);
+        
+      })
+    }
 }

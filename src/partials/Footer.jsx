@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import logo from '../assets/dokuin-logo.png'
 import styled from 'styled-components'
 
@@ -14,9 +14,8 @@ const HoverText = styled.p`
 
 const Footer = () => {
   const { pathname } = useLocation()
-
   return (
-    pathname !== '/login' &&
+    pathname !== '/login'  &&
     <div
       className="footer py-5 m-0"
       style={{
