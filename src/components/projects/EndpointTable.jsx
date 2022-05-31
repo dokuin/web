@@ -1,22 +1,23 @@
-import React, { useState } from 'react'
-import { Table } from 'react-bootstrap'
-import { MdAdd, MdEdit, MdDelete } from 'react-icons/md'
-import { useDispatch } from 'react-redux'
+import React, { useState } from "react";
+import { Table } from "react-bootstrap";
+import { MdAdd, MdEdit, MdDelete } from "react-icons/md";
+import { useDispatch } from "react-redux";
 
-import Confirm from '../Confirm'
+import Confirm from "../Confirm";
 
-import { deleteEndpoint } from '../../store/actions/project'
+import { deleteEndpoint } from "../../store/actions/project";
 
 export default function EndpointTable(props) {
-  const { endpoints, projectId, showEditModal } = props
-  const dispatch = useDispatch()
+  const { endpoints, projectId, showEditModal } = props;
+  const dispatch = useDispatch();
 
-  const [showConfirm, setShowConfirm] = useState()
+  const [showConfirm, setShowConfirm] = useState();
+  const [endpointToDelete, setEndpointToDelete] = useState();
 
-  const removeEndpoint = (endpointId) => {
-    dispatch(deleteEndpoint(endpointId, projectId))
-    setShowConfirm(false)
-  }
+  const removeEndpoint = () => {
+    dispatch(deleteEndpoint(endpointToDelete, projectId));
+    setShowConfirm(false);
+  };
 
   return (
     <div className="neumorph-card p-3">
@@ -24,7 +25,7 @@ export default function EndpointTable(props) {
         <button
           title="Add New Endpoint"
           className="neumorph-btn icon p-2 d-flex align-items-center"
-          style={{ backgroundColor: '#d5dbf6' }}
+          style={{ backgroundColor: "#d5dbf6" }}
           onClick={() => props.addEndpoint()}
         >
           <MdAdd size="2rem" />
@@ -38,7 +39,7 @@ export default function EndpointTable(props) {
             <div>
               <h2 className="text-center">No Endpoint List</h2>
             </div>
-          )
+          );
         } else {
           return (
             <Table
@@ -47,7 +48,7 @@ export default function EndpointTable(props) {
               responsive
               borderless
               striped
-              style={{ borderRadius: '1em' }}
+              style={{ borderRadius: "1em" }}
             >
               <thead>
                 <tr>
@@ -70,8 +71,8 @@ export default function EndpointTable(props) {
                       <td>{endpoint.httpRequest}</td>
                       <td>{endpoint.path}</td>
                       <td>{endpoint.description}</td>
-                      <td>{!endpoint.query ? 'No' : endpoint.query}</td>
-                      <td>{!endpoint.reqBody ? 'No' : endpoint.reqBody}</td>
+                      <td>{!endpoint.query ? "No" : endpoint.query}</td>
+                      <td>{!endpoint.reqBody ? "No" : endpoint.reqBody}</td>
                       <td className="d-flex justify-content-center">
                         <MdEdit
                           title="Edit endpoint"
@@ -83,26 +84,29 @@ export default function EndpointTable(props) {
                           title="Delete endpoint"
                           size="2em"
                           className="neumorph-btn icon p-1 ml-2"
-                          onClick={() => setShowConfirm(true)}
+                          onClick={() => {
+                            setEndpointToDelete(i);
+                            setShowConfirm(true);
+                          }}
                         />
                         <Confirm
                           confirm={showConfirm}
-                          title={'Remove endpoint?'}
+                          title={"Remove endpoint?"}
                           msg={
-                            'The endpoint will be remove from project endpoint list. Do you agree?'
+                            "The endpoint will be remove from project endpoint list. Do you agree?"
                           }
-                          ok={() => removeEndpoint(i)}
+                          ok={() => removeEndpoint()}
                           cancel={() => setShowConfirm(false)}
                         />
                       </td>
                     </tr>
-                  )
+                  );
                 })}
               </tbody>
             </Table>
-          )
+          );
         }
       })()}
     </div>
-  )
+  );
 }

@@ -11,6 +11,7 @@ const ProjectDetailForm = (props) => {
   const $router = useHistory()
   const { project, projectId } = props
   const dispatch = useDispatch()
+ 
 
   const [disable, setDisable] = useState(true)
   const [projectName, setProjectName] = useState('')
@@ -110,7 +111,7 @@ const ProjectDetailForm = (props) => {
               <Form.Control
                 type="text"
                 placeholder="Large text"
-                value={disable ? project.baseUrl : projectBaseURL}
+                value={disable ? project.baseURL : projectBaseURL}
                 onChange={(e) => setProjectBaseURL(e.target.value)}
                 disabled={disable}
               />

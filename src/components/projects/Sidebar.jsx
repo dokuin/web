@@ -31,14 +31,14 @@ const Sidebar = (props) => {
 
   const [open, setOpen] = useState(false)
   const [openDialog, setOpenDialog] = useState(false)
+  const [projectToDelete, setProjectToDelete] = useState()
 
   const select = (id) => {
-    console.log(id)
     props.selectProject(id)
   }
 
-  const deleteProject = (id) => {
-    dispatch(deleteProjectAction(id))
+  const deleteProject = () => {
+    dispatch(deleteProjectAction(projectToDelete))
     setOpenDialog(false)
   }
 
@@ -68,20 +68,26 @@ const Sidebar = (props) => {
           <hr className="mt-0" />
           <List component="nav">
             {projects.map((project, i) => {
+              const index = i
               return (
                 <>
                   <ListItem
+                    key={index}
                     className="d-flex justify-content-between mx-auto"
                     button
                   >
-                    <span className="w-100" onClick={() => select(i)}>
+                    <span className="w-100" onClick={() => select(index)}>
                       <ListItemText primary={project.name} />
                     </span>
                     <span className="d-flex align-items-center my-auto">
                       <MdDelete
                         size="2em"
                         className="neumorph-btn icon p-1"
-                        onClick={() => setOpenDialog(true)}
+                        onClick={() => {
+                          console.log(index, 'icon')
+                          setProjectToDelete(index)
+                          setOpenDialog(true)
+                        }}
                       />
                       <Confirm
                         confirm={openDialog}
@@ -89,7 +95,9 @@ const Sidebar = (props) => {
                         msg={
                           'You are about to delete your project from project list. Do you agree?'
                         }
-                        ok={() => deleteProject(i)}
+                        ok={() => {
+                          deleteProject()
+                        }}
                         cancel={() => setOpenDialog(false)}
                       />
                     </span>
