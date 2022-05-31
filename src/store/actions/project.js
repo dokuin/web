@@ -1,5 +1,7 @@
 import { RunEndpoints, ConvertMd } from 'dokuinjs'
 
+export const getProjectList = () => {}
+
 export const addNewProject = (project) => {
   return {
     type: 'ADD_NEW_PROJECT',
@@ -10,12 +12,21 @@ export const addNewProject = (project) => {
 }
 
 export const updateProject = (projectData, projectId) => {
-  return {
-    type: 'UPDATE_PROJECT',
-    payload: {
-      projectId,
-      projectData
+  return (dispatch, getState) => {
+    let projectList = [...getState().projectReducer.projects]
+    projectList[projectId] = {
+      name: projectData.name,
+      baseUrl: projectData.baseURL,
+      author: projectData.author,
+      description: projectData.description,
+      endpoints: projectList[projectId].endpoints
     }
+    dispatch({
+      type: 'UPDATE_PROJECT',
+      payload: {
+        projectList
+      }
+    })
   }
 }
 
@@ -32,8 +43,16 @@ export const deleteProject = (projectId) => {
   }
 }
 
+// export const deleteEndpoint = (desc)=>{
+//   return{
+//     type: 'DELETE_EP',
+//     payload:{
+//       desc
+//     }
+//   }
+// }
+
 export const addEndpoint = (endpoint, projectId) => {
-  console.log(endpoint)
   return (dispatch, getState) => {
     let projectList = getState().projectReducer.projects
     projectList[projectId].endpoints = [
@@ -63,8 +82,6 @@ export const editEndpoint = (endpoint, endpointId, projectId) => {
 }
 
 export const deleteEndpoint = (endpointId, projectId) => {
-  console.log(endpointId)
-  console.log(projectId)
   return (dispatch, getState) => {
     let projectList = [...getState().projectReducer.projects]
     projectList[projectId].endpoints.splice(endpointId, 1)
@@ -86,10 +103,30 @@ export const addMdProject = (response) => {
   }
 }
 
+export const setLoading = (bool) => {
+  return {
+    type: 'SET_LOADING',
+    payload: {
+      bool
+    }
+  }
+}
+
+export const tempRunEndPoint = (response) => ({
+  type: 'TEMP_ENDPOINT',
+  payload: response
+})
+
 export const runEndpoint = (project) => {
-  RunEndpoints(project)
-    .then((response) => {
-      return ConvertMd(response)
-    })
-    .catch((error) => {})
+  return (dispatch) => {
+    dispatch(setLoading(true))
+    RunEndpoints(project)
+      .then((response) => {
+        dispatch(tempRunEndPoint(response))
+        dispatch(setLoading(false))
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
 }

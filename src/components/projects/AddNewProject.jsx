@@ -20,7 +20,7 @@ export default function ProjectsDetailPage() {
     e.preventDefault()
     const project = {
       name: projectName,
-      baseUrl: projectBaseURL,
+      baseURL: projectBaseURL,
       author: projectAuthor,
       description: projectDescription,
       endpoints: []
@@ -67,7 +67,6 @@ export default function ProjectsDetailPage() {
                   <Form.Control
                     type="text"
                     placeholder="sunday-store.herokuapp.com"
-                    required
                     value={projectBaseURL}
                     onChange={(e) => {
                       setProjectBaseURL(e.target.value)
@@ -79,7 +78,6 @@ export default function ProjectsDetailPage() {
                   <Form.Control
                     type="text"
                     placeholder="Oasis"
-                    required
                     value={projectAuthor}
                     onChange={(e) => {
                       setProjectAuthor(e.target.value)
