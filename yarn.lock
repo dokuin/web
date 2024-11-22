@@ -8740,11 +8740,10 @@ react-lifecycles-compat@^3.0.4:
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
 react-lottie@^1.2.3:
-  version "1.2.8"
-  resolved "https://registry.yarnpkg.com/react-lottie/-/react-lottie-1.2.8.tgz#0f40312ce0f40f5463d6eb08350405929976ea95"
-  integrity sha512-5JFAz/lTEIMVavLAkzDdhbxf4QFSjkbEzoIyzlHsVQ4CCExWuopaVfIV87MvRiD0jRbi1P7tqLjD4+2rmZAJHg==
+  version "1.2.9"
+  resolved "https://registry.yarnpkg.com/react-lottie/-/react-lottie-1.2.9.tgz#d4ae7778c5a5ee421ae775b976e25fe962058839"
+  integrity sha512-3qOazGM5/r+q7D3+kfPE7injsIAm42zkc1AjCFDXLz8RGrDrP5cQhTdeZ4k33s8ewTQqKtyfFuO1iyR1C1pOTA==
   dependencies:
-    "@babel/runtime" "^7.26.0"
     lottie-web "^5.12.2"
     prop-types "^15.6.1"
 
