@@ -1951,18 +1951,18 @@
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz#b2ac626d6cb9c8718ab459166d4bb405b8ffa78b"
   integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
 
-"@mui/core-downloads-tracker@^9.3.0":
-  version "9.3.0"
-  resolved "https://registry.yarnpkg.com/@mui/core-downloads-tracker/-/core-downloads-tracker-9.3.0.tgz#f4e77c99a83a19dd53e4a14555090af18a1202d0"
-  integrity sha512-CrjNKhozfI6kSbD4bvfS8Nx+eFOVX/I5Tb3L73YBXSG0e4PyYbEwu03lp7AOM/ERdceQQrpBnQeSgL4FMZO5mg==
+"@mui/core-downloads-tracker@^9.3.1":
+  version "9.3.1"
+  resolved "https://registry.yarnpkg.com/@mui/core-downloads-tracker/-/core-downloads-tracker-9.3.1.tgz#e3a77e9518de53dfaddd111bf53c739d52c7e3c2"
+  integrity sha512-IAyAFNQbT7hysJ9HXphiOmWJF7G1OglzHanqCgvQgH9LA2ydxtmaTBDbcBqw6euZesyShiwvpvbnYO1GY1AyXQ==
 
 "@mui/material@^9.0.0":
-  version "9.3.0"
-  resolved "https://registry.yarnpkg.com/@mui/material/-/material-9.3.0.tgz#4eea76f38ade658c9be46b902d52fbfbc2245c86"
-  integrity sha512-H9WJkuaT7YthTOnz8ecygQoKZNVqvgZsTv/oJl6ttalfg6F1MkEi4fx/4j8f5+ju4U9mPX+lALLEZGVT9Jb3Gg==
+  version "9.3.1"
+  resolved "https://registry.yarnpkg.com/@mui/material/-/material-9.3.1.tgz#113ec05197bbd96aa00357332973af5329a6c84a"
+  integrity sha512-NahAEGIXqS1K0bA4th1jeFxBguS59NOcLbMA0vU+fSaPWKjtwGBGGHeTwlc9PSmzMjOZKceeFWESB8fVHr31hA==
   dependencies:
     "@babel/runtime" "^7.29.7"
-    "@mui/core-downloads-tracker" "^9.3.0"
+    "@mui/core-downloads-tracker" "^9.3.1"
     "@mui/system" "^9.3.0"
     "@mui/types" "^9.3.0"
     "@mui/utils" "^9.3.0"
