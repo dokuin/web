@@ -9184,9 +9184,9 @@ react-lifecycles-compat@^3.0.4:
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
 react-lottie@^2.0.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/react-lottie/-/react-lottie-2.4.0.tgz#9dd299e1023129e1dfdbafd75aad2d08dd7625ab"
-  integrity sha512-LLxeUoZETsfnKquWyA2zx8S8m4I3ND9O3pkAWWZ4nj5p2e4MaP4NGxmzXzYSqpfJfiOfxyCY4kSHS1/65nqTew==
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/react-lottie/-/react-lottie-2.4.1.tgz#3181e3b68742b4ff3632c34c90a8d9f7552a6bad"
+  integrity sha512-x3Z1J1GmzdYmPVIi4hIj7qhHrGV3kdYGb+9Vzm0NdN1Yos3zGWtCEBvLf7j+i1d2zqIH6RaM850LIFnlkxMilQ==
   dependencies:
     lottie-web "^5.12.2"
     prop-types "^15.8.1"
